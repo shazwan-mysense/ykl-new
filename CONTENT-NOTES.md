@@ -11,3 +11,4 @@
 - [ ] Blog: first two posts are their real titles; the other four are invented mockup topics.
 - [ ] Waze links are search-by-address (waze.com/ul?q=…), not their official venue links.
 - [ ] Stock lifestyle photos (assets/img/c-*.jpg, av-*.jpg) are Unsplash placeholders; product shots (macbook-air, imac-yellow, iphones, mac-lineup, macbook-float) are Apple marketing images pulled from YKL's current Wix site — replace with licensed/own photos before go-live.
+- [ ] The apple-*.png/jpg files (hero stacked MacBook Airs, "go places" duo, iPhone 17 Pro camera) are Apple's own marketing assets pulled from apple.com for this mockup — same category as the Wix ones above, must be reviewed/replaced before any public launch.

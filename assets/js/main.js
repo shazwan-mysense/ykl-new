@@ -79,14 +79,14 @@
   }, { threshold: 0.5 });
   document.querySelectorAll('.num[data-count]').forEach(function (el) { nio.observe(el); });
 
-  // Hero stage: mouse parallax (desktop, motion-safe)
-  var stage = document.querySelector('.hero-stage');
+  // Hero: mouse parallax on [data-depth] layers (desktop, motion-safe)
+  var heroEl = document.querySelector('.hero');
   var motionOK = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (stage && motionOK && window.matchMedia('(pointer: fine)').matches) {
-    var layers = stage.querySelectorAll('.fl');
+  var layers = heroEl ? heroEl.querySelectorAll('[data-depth]') : [];
+  if (layers.length && motionOK && window.matchMedia('(pointer: fine)').matches) {
     var tx = 0, ty = 0, cx = 0, cy = 0, raf2 = null;
-    document.querySelector('.hero').addEventListener('mousemove', function (e) {
-      var r = stage.getBoundingClientRect();
+    heroEl.addEventListener('mousemove', function (e) {
+      var r = heroEl.getBoundingClientRect();
       tx = (e.clientX - (r.left + r.width / 2)) / r.width;
       ty = (e.clientY - (r.top + r.height / 2)) / r.height;
       if (!raf2) raf2 = requestAnimationFrame(drift);
@@ -103,6 +103,24 @@
       } else { raf2 = null; }
     }
   }
+
+  // Rotating headline word: <span class="word" data-rotate='["A","B"]'>A</span>
+  document.querySelectorAll('.word[data-rotate]').forEach(function (el) {
+    var phrases;
+    try { phrases = JSON.parse(el.getAttribute('data-rotate')); } catch (e) { return; }
+    if (!phrases || phrases.length < 2 || !motionOK) return;
+    var i = 0;
+    setInterval(function () {
+      el.classList.add('word-out');
+      setTimeout(function () {
+        i = (i + 1) % phrases.length;
+        el.textContent = phrases[i];
+        el.classList.remove('word-out');
+        el.classList.add('word-in');
+        setTimeout(function () { el.classList.remove('word-in'); }, 520);
+      }, 380);
+    }, 3000);
+  });
 
   // Diagnostic ticker: type each phrase, hold, then next
   var diag = document.querySelector('.diag-text');
