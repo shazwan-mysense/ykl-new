@@ -327,6 +327,36 @@ body.menu-locked{overflow:hidden}
   .tile-img{height:260px}
 }
 
+/* ---------- text-on-image service tiles ---------- */
+.svc-tile{
+  position:relative;border-radius:var(--r-card);overflow:hidden;
+  min-height:330px;display:flex;align-items:flex-end;
+  border:1px solid var(--line);
+  transition:transform .35s var(--ease),box-shadow .35s var(--ease);
+}
+.svc-tile:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(20,20,20,.16)}
+.svc-tile .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .9s var(--ease)}
+.svc-tile:hover .bg{transform:scale(1.05)}
+.svc-tile::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(198deg,rgba(8,10,14,.05) 32%,rgba(8,10,14,.85) 86%);
+}
+.svc-body{position:relative;z-index:2;padding:24px 26px;color:#fff;width:100%}
+.svc-body h3{font-size:22.5px;color:#fff;letter-spacing:-.02em}
+.svc-body p{color:rgba(255,255,255,.74);font-size:15px;line-height:1.45;margin-top:8px;max-width:52ch}
+.svc-body .chip-row{margin-top:13px}
+.svc-body .chip{color:rgba(255,255,255,.62)}
+.svc-arrow{
+  position:absolute;top:18px;right:18px;z-index:2;
+  width:38px;height:38px;border-radius:50%;
+  background:rgba(255,255,255,.16);backdrop-filter:blur(8px);
+  display:flex;align-items:center;justify-content:center;
+  transition:background .3s ease,transform .3s var(--ease);
+}
+.svc-arrow svg{width:17px;height:17px;stroke:#fff;fill:none;stroke-width:1.8}
+.svc-tile:hover .svc-arrow{background:var(--blue);transform:rotate(-45deg)}
+@media (max-width:640px){.svc-tile{min-height:280px}}
+
 /* ---------- dark CTA panel ---------- */
 .card.cta-panel--dark{background:#0B0B0C;border-color:rgba(255,255,255,.07)}
 .card.cta-panel--dark:hover{box-shadow:0 1px 2px rgba(20,20,20,.03)}
