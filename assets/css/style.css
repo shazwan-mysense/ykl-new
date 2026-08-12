@@ -227,6 +227,65 @@ body.menu-locked{overflow:hidden}
   .bob,.diag-dot,.diag-target::after,.diag-text::after{animation:none!important}
 }
 
+/* ---------- dark hero (home) ---------- */
+.hero--dark{
+  background:#0B0B0C;color:#fff;text-align:center;
+  padding:clamp(150px,17vw,205px) 0 0;overflow:hidden;
+}
+.hero--dark .h1{color:#fff;max-width:14ch;margin:22px auto 0;font-size:clamp(44px,5.6vw,76px)}
+.hero--dark .lead{color:rgba(255,255,255,.62);max-width:520px;margin:24px auto 0}
+.hero--dark .hero-cta,.hero--dark .hero-chips{justify-content:center}
+.hero--dark .chip{color:rgba(255,255,255,.52)}
+.hero--dark .eyebrow{color:#6EA8FF}
+.hero--dark .eyebrow svg{stroke:#6EA8FF}
+.hero--dark .btn--ghost{color:#9CC2FF;box-shadow:inset 0 0 0 1px rgba(156,194,255,.42)}
+.hero--dark .btn--ghost:hover{background:var(--blue);color:#fff;box-shadow:inset 0 0 0 1px var(--blue),0 6px 18px rgba(22,103,217,.3)}
+.hero-visual{margin-top:clamp(42px,6vw,76px)}
+.hero-visual img{width:100%;max-height:620px;object-fit:cover;object-position:center 38%;display:block}
+
+/* nav over dark hero (until scrolled) */
+.nav--ondark:not(.scrolled) .nav-links a,
+.nav--ondark:not(.scrolled) .nav-phone{color:#fff}
+.nav--ondark:not(.scrolled) .nav-links a:hover{color:#9CC2FF}
+.nav--ondark:not(.scrolled) .nav-burger span{background:#fff}
+
+/* ---------- apple-style product tiles ---------- */
+.tile-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.tile{
+  border-radius:18px;overflow:hidden;border:1px solid var(--line);
+  display:flex;flex-direction:column;text-align:center;min-height:540px;
+  background:var(--panel);
+  transition:transform .4s var(--ease),box-shadow .4s var(--ease);
+}
+.tile:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(20,20,20,.1)}
+.tile-head{padding:46px 30px 0}
+.tile h3{font-size:clamp(24px,2.4vw,31px);letter-spacing:-.02em}
+.tile-head p{font-size:16px;color:var(--ink60);margin-top:10px}
+.tile .link-arrow{margin-top:16px;justify-content:center;font-size:15.5px}
+.tile-img{height:clamp(280px,26vw,380px);margin-top:auto;padding-top:20px;overflow:hidden}
+.tile-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .9s var(--ease)}
+.tile:hover .tile-img img{transform:scale(1.035)}
+.tile-img.contain img{object-fit:contain;padding:0 9% 7%}
+.tile--dark{background:#0B0B0C;border-color:rgba(255,255,255,.06)}
+.tile--dark h3{color:#fff}
+.tile--dark .tile-head p{color:rgba(255,255,255,.6)}
+.tile--dark .link-arrow{color:#9CC2FF}
+.tile--tint{background:#DCE9F5}
+.tile--warm{background:#E9E3D7}
+@media (max-width:900px){
+  .tile-grid{grid-template-columns:1fr}
+  .tile{min-height:440px}
+  .tile-img{height:260px}
+}
+
+/* ---------- dark CTA panel ---------- */
+.card.cta-panel--dark{background:#0B0B0C;border-color:rgba(255,255,255,.07)}
+.card.cta-panel--dark:hover{box-shadow:0 1px 2px rgba(20,20,20,.03)}
+.cta-panel--dark .h2{color:#fff}
+.cta-panel--dark .cta-side p{color:rgba(255,255,255,.62)}
+.cta-panel--dark .eyebrow{color:#6EA8FF}
+.cta-panel--dark .eyebrow svg{stroke:#6EA8FF}
+
 /* decorative floating devices (site-wide accents) */
 .has-drift{position:relative}
 .has-drift>.container{position:relative;z-index:1}

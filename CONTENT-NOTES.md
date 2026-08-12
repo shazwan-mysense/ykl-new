@@ -1,5 +1,7 @@
 # Content notes — items to confirm with YKL before go-live
 
+- [ ] IMPORTANT: the mockup now positions YKL as Apple-only (per stakeholder direction, Aug 12 2026), but yklmacfix.com currently advertises "Smartphone repair — all brands" and their TikTok shows Samsung/POCO motherboard jobs. Confirm with the client whether non-Apple repair should be dropped from the site.
+
 - [ ] Kuantan Parade street name: their footer prints "Kuantan He Abdul Rahman" (Wix typo). Mockup uses "Jalan Haji Abdul Rahman" — confirm.
 - [ ] PJ hours differ between their footer (Mon–Fri 10:30–7:30, Sat–Sun 10:30–6:00) and their contact page (Mon–Fri 10:00–8:00, Sat 10:00–6:00). Mockup uses the footer version — confirm.
 - [ ] Warranty: "up to 5 years" is their sitewide claim; per-service durations unknown. Chips say "Backed by warranty" only.
