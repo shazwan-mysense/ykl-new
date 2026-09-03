@@ -1,9 +1,19 @@
 # Content notes — items to confirm with YKL before go-live
 
-## Client photo pack (received 3 Sep 2026) — now live on the site
+## Client photo pack (received 3 Sep 2026) — PARTLY ROLLED BACK
 Source: `MYS_YKL_Website Development_6 pages` (37 photos + logo). Processed copies live in `assets/img/`
 as `ykl-work-*` (bench candids), `ykl-team-*` (staff portraits), `ykl-store-*` (storefront) and `ba-*`
 (before/after). Originals are untouched in the client folder.
+
+**Current state (3 Sep 2026):** the client photos were swapped in site-wide, then rolled back at the
+stakeholder's request — the phone-shot photography did not sit well against the polished Apple-style
+mockup. Stock/product imagery is restored everywhere it was before. Only two places still use client
+photos, because they exist purely to show real work:
+  - homepage "Brought In Broken. Collected Like New." — the four before/after repair pairs
+  - About "The People Who Fix Your Mac" — the seven staff portraits
+The unused `ykl-work-*` and `ykl-store-*` crops are kept in `assets/img/` (and the enhanced versions in
+git history) so they can be reinstated quickly if the client wants real photography later.
+If YKL can supply professionally shot bench/store photography, swapping it in is a small change.
 
 - [ ] Team section (About) lists first names only — Chris, Shahid, Huang, Ah Wei, Terence, Ah Hong, Han.
       Confirm correct spellings, preferred names, and whether they want job titles shown.
