@@ -17,8 +17,9 @@ as `ykl-work-*` (bench candids), `ykl-team-*` (staff portraits), `ykl-store-*` (
 - [ ] Storefront photos all appear to be the Petaling Jaya HQ. Need exteriors/interiors of both Kuantan
       branches before the location cards can each carry their own photo.
 - [ ] Still missing, would upgrade the site further: a water-damage repair in progress, iPhone/iPad
-      internals (all teardown shots supplied are MacBooks), a full team group photo, and a customer
-      handover at the counter.
+      internals (all teardown shots supplied are MacBooks), a keyboard / top-case replacement (the
+      Keyboard Replacement tile currently uses a general bench shot), a full team group photo, and a
+      customer handover at the counter.
 - [ ] Photo editing applied: white balance, shadow lift and mild sharpening on the bench/store/team
       photos (several were underexposed). Before/after pairs deliberately received NO exposure change —
       only identical mild white balance on both halves — so the comparison is not manipulated.

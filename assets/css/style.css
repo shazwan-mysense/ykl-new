@@ -158,73 +158,11 @@ body.menu-locked{overflow:hidden}
 .hero .lead{max-width:480px;margin-top:26px}
 .hero-cta{display:flex;gap:12px;margin-top:38px;flex-wrap:wrap}
 
-/* hero stage (floating devices, home) */
-.hero-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:clamp(24px,4vw,56px);align-items:center}
-.hero-stage{position:relative;height:clamp(380px,36vw,560px)}
-.hero-stage::before{
-  content:"";position:absolute;inset:-4% -6%;
-  background-image:radial-gradient(rgba(20,20,20,.13) 1.1px,transparent 1.1px);
-  background-size:26px 26px;
-  -webkit-mask-image:radial-gradient(ellipse 70% 65% at 55% 45%,#000 30%,transparent 72%);
-  mask-image:radial-gradient(ellipse 70% 65% at 55% 45%,#000 30%,transparent 72%);
-}
-.fl{position:absolute;will-change:transform}
+/* floating device accents (bob is shared by .drift, hero visual and service lineup) */
 .bob{animation:bob 7s ease-in-out infinite}
 @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-13px)}}
-.stage-device{width:104%;right:-10%;top:-3%}
-.stage-device img{width:100%;transform:rotate(-7deg)}
-.stage-mini{width:37%;left:-2%;bottom:5%;z-index:3}
-.stage-mini img{width:100%;transform:rotate(5deg);filter:drop-shadow(0 22px 28px rgba(20,20,20,.16))}
-.float-chip{
-  display:flex;align-items:center;gap:10px;
-  background:var(--panel);border:1px solid var(--line);border-radius:12px;
-  box-shadow:0 10px 28px rgba(20,20,20,.1);
-  padding:12px 16px;z-index:4;white-space:nowrap;
-}
-.float-chip svg{width:17px;height:17px;stroke:var(--blue);fill:none;stroke-width:1.6;flex:none}
-.float-chip .fc-label{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink40);display:block}
-.float-chip .fc-text{font-size:14.5px;letter-spacing:-.01em;line-height:1.2}
-.chip-warranty{top:4%;left:1%}
-.chip-express{right:-1%;bottom:26%}
-.diag-card{
-  left:16%;bottom:-3%;z-index:4;
-  display:flex;align-items:center;gap:9px;
-  background:var(--panel);border:1px solid var(--line);border-radius:100px;
-  box-shadow:0 10px 28px rgba(20,20,20,.1);
-  padding:10px 18px;
-  font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink60);
-  white-space:nowrap;
-}
-.diag-dot{width:7px;height:7px;border-radius:50%;background:#22B45E;flex:none;animation:diagPulse 1.6s ease-in-out infinite}
-@keyframes diagPulse{0%,100%{opacity:1}50%{opacity:.35}}
-.diag-text::after{content:"";display:inline-block;width:7px;height:13px;background:var(--ink40);margin-left:5px;vertical-align:-2px;animation:caret 1s steps(1) infinite}
-@keyframes caret{50%{opacity:0}}
-.diag-target{
-  width:20px;height:20px;border-radius:50%;
-  border:1.6px solid var(--blue);z-index:2;
-  right:34%;top:44%;
-}
-.diag-target::after{
-  content:"";position:absolute;inset:-1.6px;border-radius:50%;
-  border:1.6px solid var(--blue);
-  animation:ring 2.2s cubic-bezier(.25,.6,.35,1) infinite;
-}
-@keyframes ring{0%{transform:scale(1);opacity:.9}100%{transform:scale(2.6);opacity:0}}
-@media (max-width:900px){
-  .hero-grid{grid-template-columns:1fr}
-  .hero-stage{height:min(88vw,420px);margin-top:26px}
-  .stage-device{width:96%;right:-4%;top:0}
-  .chip-warranty{left:-1%}
-  .diag-card{left:8%}
-}
-@media (max-width:640px){
-  .float-chip .fc-text{font-size:13px}
-  .float-chip{padding:10px 13px}
-  .diag-card{font-size:10.5px;padding:9px 14px;left:2%}
-  .stage-mini{width:42%;bottom:2%}
-}
 @media (prefers-reduced-motion:reduce){
-  .bob,.diag-dot,.diag-target::after,.diag-text::after{animation:none!important}
+  .bob{animation:none!important}
 }
 
 /* ---------- dark hero (home) ---------- */

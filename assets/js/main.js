@@ -122,34 +122,6 @@
     }, 3000);
   });
 
-  // Diagnostic ticker: type each phrase, hold, then next
-  var diag = document.querySelector('.diag-text');
-  if (diag) {
-    var phrases;
-    try { phrases = JSON.parse(diag.getAttribute('data-diag')); } catch (e) { phrases = null; }
-    if (phrases && phrases.length && motionOK) {
-      var pi = 0;
-      function typePhrase() {
-        var text = phrases[pi];
-        var ci = 0;
-        diag.textContent = '';
-        (function typeChar() {
-          if (ci <= text.length) {
-            diag.textContent = text.slice(0, ci);
-            ci++;
-            setTimeout(typeChar, 42);
-          } else {
-            setTimeout(function () {
-              pi = (pi + 1) % phrases.length;
-              typePhrase();
-            }, pi === 0 ? 2600 : 1700);
-          }
-        })();
-      }
-      typePhrase();
-    }
-  }
-
   // Before / after cards: switch buttons, click-to-toggle, hover preview on desktop
   var fine = window.matchMedia('(pointer: fine)').matches;
   document.querySelectorAll('.ba-card').forEach(function (card) {
