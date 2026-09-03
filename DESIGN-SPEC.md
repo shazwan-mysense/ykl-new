@@ -48,6 +48,17 @@ Borrow its CONVERSION patterns, keep Devix visuals:
 - WhatsApp-first CTAs + floating WhatsApp button (`.float-wa`, include on every page before scripts)
 - Symptom-led copy on device cards (e.g. "Mac mini won't power on after a power trip?")
 
+## Real client photography (Sep 2026)
+Client-supplied photos replace stock wherever a genuine equivalent exists. Two components were added for them:
+- `.ba-grid` / `.ba-card` — before/after proof. Two stacked `<img>` crossfade inside `.ba-media`; `.show-after`
+  swaps image + badge. Controlled by the `.ba-switch` Before/After buttons, by clicking the image, and by hover
+  on fine-pointer devices (hover stops once the user clicks a switch). Wired in `main.js`.
+- `.team-grid` / `.team-card` — 4:5 staff portraits, name + mono label. 4 cols → 3 → 2.
+Naming: `ykl-work-N.jpg` (bench candids, 3:2) and `-p` variants (4:5), `ykl-team-<name>.jpg`,
+`ykl-store-N.jpg`, `ba-<device>-<n>-<before|after>.jpg`.
+Rule: an image must depict what its section claims. Never put a product render or an unrelated stock scene
+under copy that says "our team", "our workshop" or names a specific repair.
+
 ## Pages
 index.html (canonical, hand-written) · services.html · devices.html · about.html · contact.html · blog.html · mac-screen-repair.html · mac-battery-replacement.html · mac-water-damage-repair.html · mac-logicboard-repair.html · blog-mac-running-slow.html
 All flat in root; assets at assets/…. Every page: same <head> (Google Fonts Host Grotesk + IBM Plex Mono, style.css), same nav/footer, scripts lenis.min.js + main.js before </body>.

@@ -150,6 +150,31 @@
     }
   }
 
+  // Before / after cards: switch buttons, click-to-toggle, hover preview on desktop
+  var fine = window.matchMedia('(pointer: fine)').matches;
+  document.querySelectorAll('.ba-card').forEach(function (card) {
+    var media = card.querySelector('.ba-media');
+    var btns = card.querySelectorAll('.ba-switch button');
+    if (!media) return;
+    function set(after) {
+      media.classList.toggle('show-after', after);
+      btns.forEach(function (b) {
+        b.classList.toggle('on', (b.getAttribute('data-state') === 'after') === after);
+      });
+    }
+    btns.forEach(function (b) {
+      b.addEventListener('click', function () { set(b.getAttribute('data-state') === 'after'); });
+    });
+    media.addEventListener('click', function () { set(!media.classList.contains('show-after')); });
+    if (fine) {
+      var sticky = false;
+      btns.forEach(function (b) { b.addEventListener('click', function () { sticky = true; }); });
+      media.addEventListener('mouseenter', function () { if (!sticky) set(true); });
+      media.addEventListener('mouseleave', function () { if (!sticky) set(false); });
+      media.addEventListener('click', function () { sticky = true; });
+    }
+  });
+
   // Mock form
   var form = document.querySelector('form[data-mock]');
   if (form) {
