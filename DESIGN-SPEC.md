@@ -64,6 +64,11 @@ Client-supplied photos replace stock wherever a genuine equivalent exists. Two c
   `.slider--team` (About). GOTCHA: `scroll-snap-type: mandatory` cancels programmatic scrolling, so the
   arrows disable snap, tween `scrollLeft` themselves, then restore snap — with a setTimeout fallback in
   case requestAnimationFrame is throttled.
+  Autoplay: advances one page every 4.8s (override per slider with `data-autoplay`), rewinds to the start
+  at the end, and pauses on hover, on focus, while the tab is hidden, while the section is off screen,
+  and for 9s after any manual arrow/drag/touch. Disabled entirely under prefers-reduced-motion.
+  Visibility is measured with getBoundingClientRect per tick rather than IntersectionObserver, so it
+  cannot get stuck off if the observer never reports.
 Naming: `ykl-work-N.jpg` (bench candids, 3:2) and `-p` variants (4:5), `ykl-team-<name>.jpg`,
 `ykl-store-N.jpg`, `ba-<device>-<n>-<before|after>.jpg`.
 Rule: an image must depict what its section claims. Never put a product render or an unrelated stock scene

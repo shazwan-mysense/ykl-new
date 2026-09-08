@@ -207,7 +207,7 @@
       if (prev) prev.disabled = track.scrollLeft <= 2;
       if (next) next.disabled = track.scrollLeft >= max - 2;
     }
-    function animateTo(target) {
+    function animateTo(target, ms) {
       var max = Math.max(0, track.scrollWidth - track.clientWidth);
       target = Math.max(0, Math.min(max, target));
       var from = track.scrollLeft, dist = target - from;
@@ -223,7 +223,7 @@
         update();
       }
       if (!motionOK) { finish(); return; }
-      var t0 = null, dur = 430;
+      var t0 = null, dur = ms || 430;
       requestAnimationFrame(function frame(t) {
         if (settled) return;
         if (t0 === null) t0 = t;
@@ -233,8 +233,8 @@
       });
       setTimeout(finish, dur + 160);         // land anyway if rAF is throttled
     }
-    if (prev) prev.addEventListener('click', function () { animateTo(track.scrollLeft - pageStep()); });
-    if (next) next.addEventListener('click', function () { animateTo(track.scrollLeft + pageStep()); });
+    if (prev) prev.addEventListener('click', function () { nudged(); animateTo(track.scrollLeft - pageStep()); });
+    if (next) next.addEventListener('click', function () { nudged(); animateTo(track.scrollLeft + pageStep()); });
     track.addEventListener('scroll', function () {
       if (!track._t) track._t = requestAnimationFrame(function () { track._t = null; update(); });
     }, { passive: true });
@@ -244,7 +244,7 @@
     var down = false, startX = 0, startLeft = 0, moved = 0;
     track.addEventListener('pointerdown', function (e) {
       if (e.pointerType !== 'mouse') return;
-      down = true; moved = 0; startX = e.clientX; startLeft = track.scrollLeft;
+      down = true; moved = 0; startX = e.clientX; startLeft = track.scrollLeft; nudged();
       track.classList.add('dragging');
     });
     track.addEventListener('pointermove', function (e) {
@@ -268,6 +268,39 @@
     }, true);
 
     update();
+
+    // ---- autoplay -------------------------------------------------------
+    // Advances one page at a time. Pauses on hover, on focus, while the tab
+    // or section is out of view, and for a cooldown after any manual input.
+    var AUTO_MS = parseInt(sl.getAttribute('data-autoplay') || '4800', 10);
+    var hovered = false, quietUntil = 0;
+
+    function nudged() { quietUntil = Date.now() + 9000; }
+
+    function onScreen() {
+      var r = sl.getBoundingClientRect();
+      var vh = window.innerHeight || document.documentElement.clientHeight || 0;
+      return r.bottom > 0 && r.top < vh;
+    }
+    function mayAdvance() {
+      return motionOK && !hovered && !document.hidden &&
+             Date.now() >= quietUntil && onScreen() &&
+             track.scrollWidth > track.clientWidth + 2;
+    }
+    function advance() {
+      if (!mayAdvance()) return;
+      var max = track.scrollWidth - track.clientWidth;
+      if (track.scrollLeft >= max - 4) animateTo(0, 760);   // gentle rewind
+      else animateTo(track.scrollLeft + pageStep());
+    }
+
+    sl.addEventListener('mouseenter', function () { hovered = true; });
+    sl.addEventListener('mouseleave', function () { hovered = false; });
+    sl.addEventListener('focusin',  function () { hovered = true; });
+    sl.addEventListener('focusout', function () { hovered = false; });
+    track.addEventListener('touchstart', nudged, { passive: true });
+
+    if (motionOK) setInterval(advance, AUTO_MS);
   });
 
   // Mock form
