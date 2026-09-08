@@ -174,6 +174,95 @@
     paintStack();
   }
 
+  // Sliders: arrows, drag-to-scroll, snap, progress rail
+  document.querySelectorAll('.slider').forEach(function (sl) {
+    var track = sl.querySelector('.slider-track');
+    if (!track) return;
+    var prev = sl.querySelector('[data-slide="prev"]');
+    var next = sl.querySelector('[data-slide="next"]');
+    var bar  = sl.querySelector('.slider-bar');
+
+    function pageStep() {
+      var item = track.querySelector('.slider-item');
+      if (!item) return track.clientWidth;
+      var gap = parseFloat(getComputedStyle(track).columnGap || '24') || 24;
+      var per = Math.max(1, Math.floor(track.clientWidth / (item.offsetWidth + gap)));
+      return per * (item.offsetWidth + gap);
+    }
+    function update() {
+      var max = track.scrollWidth - track.clientWidth;
+      var p = max > 1 ? track.scrollLeft / max : 0;
+      if (bar) {
+        var frac = Math.min(1, track.clientWidth / Math.max(track.scrollWidth, 1));
+        bar.style.width = (frac * 100).toFixed(2) + '%';
+        bar.style.marginLeft = (p * (100 - frac * 100)).toFixed(2) + '%';
+      }
+      if (prev) prev.disabled = track.scrollLeft <= 2;
+      if (next) next.disabled = track.scrollLeft >= max - 2;
+    }
+    function animateTo(target) {
+      var max = Math.max(0, track.scrollWidth - track.clientWidth);
+      target = Math.max(0, Math.min(max, target));
+      var from = track.scrollLeft, dist = target - from;
+      if (Math.abs(dist) < 1) return;
+      var snap = track.style.scrollSnapType;
+      track.style.scrollSnapType = 'none';   // mandatory snap cancels programmatic scrolling
+      var settled = false;
+      function finish() {
+        if (settled) return;
+        settled = true;
+        track.scrollLeft = target;
+        track.style.scrollSnapType = snap;
+        update();
+      }
+      if (!motionOK) { finish(); return; }
+      var t0 = null, dur = 430;
+      requestAnimationFrame(function frame(t) {
+        if (settled) return;
+        if (t0 === null) t0 = t;
+        var p = Math.min((t - t0) / dur, 1);
+        track.scrollLeft = from + dist * (1 - Math.pow(1 - p, 3));
+        if (p < 1) requestAnimationFrame(frame); else finish();
+      });
+      setTimeout(finish, dur + 160);         // land anyway if rAF is throttled
+    }
+    if (prev) prev.addEventListener('click', function () { animateTo(track.scrollLeft - pageStep()); });
+    if (next) next.addEventListener('click', function () { animateTo(track.scrollLeft + pageStep()); });
+    track.addEventListener('scroll', function () {
+      if (!track._t) track._t = requestAnimationFrame(function () { track._t = null; update(); });
+    }, { passive: true });
+    window.addEventListener('resize', update);
+
+    // pointer drag (mouse only; touch already scrolls natively)
+    var down = false, startX = 0, startLeft = 0, moved = 0;
+    track.addEventListener('pointerdown', function (e) {
+      if (e.pointerType !== 'mouse') return;
+      down = true; moved = 0; startX = e.clientX; startLeft = track.scrollLeft;
+      track.classList.add('dragging');
+    });
+    track.addEventListener('pointermove', function (e) {
+      if (!down) return;
+      var dx = e.clientX - startX;
+      moved = Math.max(moved, Math.abs(dx));
+      track.scrollLeft = startLeft - dx;
+    });
+    function endDrag() {
+      if (!down) return;
+      down = false;
+      track.classList.remove('dragging');
+      update();
+    }
+    track.addEventListener('pointerup', endDrag);
+    track.addEventListener('pointerleave', endDrag);
+    track.addEventListener('pointercancel', endDrag);
+    // swallow the click that ends a drag so cards don't navigate
+    track.addEventListener('click', function (e) {
+      if (moved > 6) { e.preventDefault(); e.stopPropagation(); moved = 0; }
+    }, true);
+
+    update();
+  });
+
   // Mock form
   var form = document.querySelector('form[data-mock]');
   if (form) {

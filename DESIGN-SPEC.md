@@ -58,6 +58,12 @@ Client-supplied photos replace stock wherever a genuine equivalent exists. Two c
   reduced-motion. NOTE: `overflow-x:hidden` on `body` silently kills `position:sticky` — the floating
   `.drift` devices are instead clipped by `.has-drift{overflow:clip}` on their own section.
 - `.team-grid` / `.team-card` — 4:5 staff portraits, name + mono label. 4 cols → 3 → 2.
+- `.slider` / `.slider-track` / `.slider-item` — reusable horizontal slider: scroll-snap track, circular
+  prev/next buttons (`[data-slide]`), mouse drag-to-scroll, and a thin blue progress rail. Items peek at the
+  right edge to signal swipeability. Used by `.slider--quote` (testimonials, home + about) and
+  `.slider--team` (About). GOTCHA: `scroll-snap-type: mandatory` cancels programmatic scrolling, so the
+  arrows disable snap, tween `scrollLeft` themselves, then restore snap — with a setTimeout fallback in
+  case requestAnimationFrame is throttled.
 Naming: `ykl-work-N.jpg` (bench candids, 3:2) and `-p` variants (4:5), `ykl-team-<name>.jpg`,
 `ykl-store-N.jpg`, `ba-<device>-<n>-<before|after>.jpg`.
 Rule: an image must depict what its section claims. Never put a product render or an unrelated stock scene
