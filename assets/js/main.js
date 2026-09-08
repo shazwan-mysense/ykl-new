@@ -3,7 +3,14 @@
   // Lenis smooth scroll
   var lenis = null;
   if (window.Lenis && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    lenis = new Lenis({ lerp: 0.1, wheelMultiplier: 1 });
+    lenis = new Lenis({
+      lerp: 0.1,
+      wheelMultiplier: 1,
+      // let horizontal tracks keep their own wheel/trackpad events
+      prevent: function (node) {
+        return !!(node && node.classList && node.classList.contains('slider-track'));
+      }
+    });
     function raf(t) { lenis.raf(t); requestAnimationFrame(raf); }
     requestAnimationFrame(raf);
   }

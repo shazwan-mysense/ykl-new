@@ -338,10 +338,13 @@ body.menu-locked{overflow:hidden}
 .slider--quote .slider-item{width:clamp(258px,25vw,318px)}
 .slider--quote .t-photo,.slider--quote .t-quote{min-height:0}
 .slider--team  .slider-item{width:clamp(186px,17vw,228px)}
+.slider--post  .slider-item{width:clamp(272px,27vw,340px)}
+.slider--svc   .slider-item{width:clamp(262px,26vw,322px)}
 @media (max-width:640px){
   .slider-track{gap:16px}
   .slider--quote .slider-item{width:78vw}
   .slider--team  .slider-item{width:52vw}
+  .slider--post .slider-item,.slider--svc .slider-item{width:80vw}
   .slider-head{margin-bottom:24px}
 }
 /* ---------- team grid ---------- */
