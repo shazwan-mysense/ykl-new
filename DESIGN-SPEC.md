@@ -50,9 +50,13 @@ Borrow its CONVERSION patterns, keep Devix visuals:
 
 ## Real client photography (Sep 2026)
 Client-supplied photos replace stock wherever a genuine equivalent exists. Two components were added for them:
-- `.ba-grid` / `.ba-card` — before/after proof. Two stacked `<img>` crossfade inside `.ba-media`; `.show-after`
-  swaps image + badge. Controlled by the `.ba-switch` Before/After buttons, by clicking the image, and by hover
-  on fine-pointer devices (hover stops once the user clicks a switch). Wired in `main.js`.
+- `.ba-stack` / `.ba-row` / `.ba-card` — before/after proof, built as scroll-stacking rows. Each `.ba-row`
+  is `position:sticky` at the same top offset, so row 2 slides up and covers row 1 as you scroll; `main.js`
+  adds a depth cue (the covered row scales to .955 and fades). Two stacked `<img>` crossfade inside
+  `.ba-media`; `.show-after` swaps them. Controlled by the `.ba-switch` Before/After buttons, by clicking
+  the image, and by hover on fine-pointer devices. Stacking is disabled below 901px and under
+  reduced-motion. NOTE: `overflow-x:hidden` on `body` silently kills `position:sticky` — the floating
+  `.drift` devices are instead clipped by `.has-drift{overflow:clip}` on their own section.
 - `.team-grid` / `.team-card` — 4:5 staff portraits, name + mono label. 4 cols → 3 → 2.
 Naming: `ykl-work-N.jpg` (bench candids, 3:2) and `-p` variants (4:5), `ykl-team-<name>.jpg`,
 `ykl-store-N.jpg`, `ba-<device>-<n>-<before|after>.jpg`.

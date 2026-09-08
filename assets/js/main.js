@@ -147,6 +147,33 @@
     }
   });
 
+  // Before/after rows: depth cue as the next row slides over the previous one
+  var baRows = Array.prototype.slice.call(document.querySelectorAll('.ba-row'));
+  if (baRows.length > 1 && motionOK) {
+    var stackQuery = window.matchMedia('(min-width: 901px)');
+    var stackTicking = false;
+    function paintStack() {
+      stackTicking = false;
+      if (!stackQuery.matches) {
+        baRows.forEach(function (r) { r.style.transform = ''; r.style.opacity = ''; });
+        return;
+      }
+      for (var i = 0; i < baRows.length - 1; i++) {
+        var cur = baRows[i], next = baRows[i + 1];
+        var gap = next.getBoundingClientRect().top - cur.getBoundingClientRect().top;
+        var covered = 1 - Math.min(Math.max(gap / Math.max(cur.offsetHeight, 1), 0), 1);
+        cur.style.transform = 'scale(' + (1 - 0.045 * covered).toFixed(4) + ')';
+        cur.style.opacity = (1 - 0.4 * covered).toFixed(3);
+      }
+    }
+    function onStackScroll() {
+      if (!stackTicking) { stackTicking = true; requestAnimationFrame(paintStack); }
+    }
+    window.addEventListener('scroll', onStackScroll, { passive: true });
+    window.addEventListener('resize', onStackScroll);
+    paintStack();
+  }
+
   // Mock form
   var form = document.querySelector('form[data-mock]');
   if (form) {
