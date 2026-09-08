@@ -265,13 +265,15 @@ body.menu-locked{overflow:hidden}
 }
 
 /* ---------- before / after proof (scroll-stacking rows) ---------- */
-.ba-stack{display:flex;flex-direction:column;gap:clamp(48px,6vw,96px)}
+.ba-stack{display:flex;flex-direction:column}
+/* at rest this reads as a normal 2x2 grid; on scroll the lower row slides up over the upper one */
 .ba-row{
   position:sticky;top:clamp(86px,11vh,124px);
   display:grid;grid-template-columns:repeat(2,1fr);gap:26px;
-  background:var(--bg);padding:16px 0 44px;
+  background:var(--bg);padding-bottom:26px;
   transform-origin:50% 0;will-change:transform,opacity;
 }
+.ba-row:last-child{padding-bottom:0}
 .ba-card{
   background:var(--panel);border:1px solid var(--line);border-radius:var(--r-card);
   overflow:hidden;display:flex;flex-direction:column;

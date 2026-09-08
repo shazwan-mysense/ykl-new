@@ -162,8 +162,8 @@
         var cur = baRows[i], next = baRows[i + 1];
         var gap = next.getBoundingClientRect().top - cur.getBoundingClientRect().top;
         var covered = 1 - Math.min(Math.max(gap / Math.max(cur.offsetHeight, 1), 0), 1);
-        cur.style.transform = 'scale(' + (1 - 0.045 * covered).toFixed(4) + ')';
-        cur.style.opacity = (1 - 0.4 * covered).toFixed(3);
+        cur.style.transform = 'scale(' + (1 - 0.03 * covered).toFixed(4) + ')';
+        cur.style.opacity = (1 - 0.3 * covered).toFixed(3);
       }
     }
     function onStackScroll() {
