@@ -8,7 +8,7 @@ in the repo root so the two can be compared side by side.
 Open `v2/index.html`. Assets: `v2/assets/css/v2.css`, `v2/assets/js/v2.js`, images shared from
 `../assets/img/`.
 
-## Pages (12)
+## Pages (13)
 index · services · devices · about · contact · blog
 · mac-screen-repair · mac-battery-replacement · mac-logicboard-repair · mac-water-damage-repair
 · blog-professional-mac-repair · blog-mac-battery-health · blog-water-damage-first-hour
