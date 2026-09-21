@@ -44,3 +44,37 @@ else on the site uses the real YKL photography.
 - [ ] Waze links are search-by-address (waze.com/ul?q=…), not their official venue links.
 - [ ] Stock lifestyle photos (assets/img/c-*.jpg, av-*.jpg) are Unsplash placeholders; product shots (macbook-air, imac-yellow, iphones, mac-lineup, macbook-float) are Apple marketing images pulled from YKL's current Wix site — replace with licensed/own photos before go-live.
 - [ ] The apple-*.png/jpg files (hero stacked MacBook Airs, "go places" duo, iPhone 17 Pro camera) are Apple's own marketing assets pulled from apple.com for this mockup — same category as the Wix ones above, must be reviewed/replaced before any public launch.
+
+---
+
+## v2 (client reference-mockup design) — 21 Sep 2026
+
+The client asked for the whole design to be replaced with one matching a reference mockup image
+they supplied. That mockup is a generic template and carried several **wrong** details, all of
+which were replaced with YKL's verified data:
+
+| In the client's mockup PNG | Used on v2 instead | Source |
+|---|---|---|
+| `+60 12-345 6789` | PJ `+60 3-7495 9092` · Pandan Damai `+60 19-987 3386` · Kuantan Parade `+60 11-2625 6581` | existing verified facts |
+| 2 branches, one at "Publika KL" | **3 branches**, no Publika branch exists | existing verified facts |
+| "Up to 3 Years Warranty" | **Up to 5 years warranty**, on selected repairs | existing verified facts |
+| "No Fix, No Charge" | dropped. It is kissmymac's claim, not YKL's. Replaced with free diagnostics / quote-first | — |
+| "9 Years in the Market" | dropped, unverified. Replaced with 1,190+ Google reviews · 1M+ TikTok views · 3 branches · up to 5 yrs warranty | existing verified facts |
+| "MacBook Neo" | not an Apple product. Device row is MacBook Air, MacBook Pro, iMac, Mac mini, iPad, iPhone | — |
+| Hours "Mon–Sat 10–7" | PJ Mon–Fri 10:30am–7:30pm, Sat–Sun 10:30am–6:00pm · both Kuantan branches Mon–Sat 11:00am–9:00pm | existing verified facts |
+
+### Still TODO-confirm on v2
+- **Testimonials** on `v2/index.html` are reconstructed, not verbatim Google reviews. Replace with
+  real quotes (or a live Google reviews widget) before launch.
+- **Team roles** on `v2/about.html` (Senior technician, Board-level specialist, Mac technician,
+  Diagnostics, Workshop lead, Front of house) are assumed. Confirm each person's actual title.
+- **The three blog articles** are original copy written for the mockup. They are factually
+  conservative but have not been reviewed by the client.
+- **Apple product renders** (`macbook-air.png`, `macbook-float-cut.png`, `imac-yellow-cut.png`,
+  `dev-macmini.png`, `ipad-hero.png`, `dev-iphone.png`, `mac-lineup.png`, `mbp-hero.jpg`) come from
+  Apple's own marketing/store imagery. Licensing must be cleared, or they must be re-shot, before
+  this goes live.
+- **"Apple only"** positioning carries over from v1 and is still unconfirmed against the live site,
+  which advertises all brands.
+- The booking form on `v2/contact.html` is a mock. It validates and shows a confirmation but sends
+  nothing.
