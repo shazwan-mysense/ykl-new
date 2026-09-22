@@ -1,12 +1,15 @@
-# YKL Mac Fix — v2 (client reference-mockup design)
+# YKL Mac Fix — the current site
 
-A second, complete design of the site, built to match the reference mockup the client supplied
-(black utility bar → white header with dropdown nav → dark hero → trust bar → service cards →
-device row → locations + why-choose → 5-step process). v1 (the Devix-derived design) is untouched
-in the repo root so the two can be compared side by side.
+Built to match the reference mockup the client supplied (black utility bar → white header with
+dropdown nav → dark hero → trust bar → service cards → device row → locations + why-choose →
+5-step process), then given a craft pass because the mockup was itself AI-generated.
 
-Open `v2/index.html`. Assets: `v2/assets/css/v2.css`, `v2/assets/js/v2.js`, images shared from
-`../assets/img/`.
+**This design is now the site root.** Open `index.html`.
+Assets: `assets/css/v2.css`, `assets/js/v2.js`, images in `assets/img/`.
+
+The earlier Devix-derived design is preserved at **`v1/`** for comparison — it has its own
+`assets/css/style.css` and `assets/js/main.js`, and its pages reference `../assets/`.
+`v2/` now holds redirect stubs only, so links handed out while this design lived there still work.
 
 ## Pages (13)
 index · services · devices · about · contact · blog
@@ -28,7 +31,7 @@ index · services · devices · about · contact · blog
 ## The craft layer (22 Sep 2026)
 
 The client's reference mockup was itself AI-generated, so building it faithfully inherited its tells. The
-bottom of `v2.css` is a **craft layer**, loaded last, that keeps the approved layout, palette and typefaces and
+bottom of `assets/css/v2.css` is a **craft layer**, loaded last, that keeps the approved layout, palette and typefaces and
 changes how each section is composed. Ideas were taken from the Framer templates the client's agency picked as
 reference — Spector, Lateral, Himon, Outline Studio, Kairn, ClearPath, Trev, Mira — all of which share one
 lesson: **hairline rules and real photography, not wall-to-wall rounded cards.**
@@ -95,7 +98,7 @@ disabled, 0 of 63 animated elements are hidden.
 Every other page is generated:
 
 ```bash
-cd v2 && python3 _build.py && python3 _build2.py
+python3 _build.py && python3 _build2.py
 ```
 
 `_build.py` slices the header/footer/process blocks out of `index.html`, then writes services,

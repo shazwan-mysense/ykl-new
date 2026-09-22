@@ -33,9 +33,9 @@ HEAD = '''<!DOCTYPE html>
 <meta property="og:site_name" content="YKL Mac Fix">
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
-<meta property="og:image" content="../assets/img/ykl-work-3.jpg">
+<meta property="og:image" content="assets/img/ykl-work-3.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="../assets/img/ykl-logo.png">
+<link rel="icon" href="assets/img/ykl-logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
@@ -78,7 +78,7 @@ def phero(crumb, h1, lead, art=None, script=None, plain=False, cta=True):
         alt = ART_ALT.get(art, '')
         s += f'''
     <div class="phero-art rv" style="--d:.2s">{sc}
-      <img src="../assets/img/{art}" alt="{alt}" loading="eager">
+      <img src="assets/img/{art}" alt="{alt}" loading="eager">
     </div>'''
     s += '\n  </div>\n</section>\n'
     return s
@@ -110,7 +110,7 @@ def tiles(items, cols=3, contain=False):
         ic = ' tile-img--contain' if contain else ''
         link = f'\n        <a class="arrow-link" href="{href}">Learn more {ARROW}</a>' if href else ''
         out.append(f'''  <article class="tile rv"{d}>
-    <div class="tile-img{ic} zoom"><img src="../assets/img/{img}" alt="{alt}" loading="lazy"></div>
+    <div class="tile-img{ic} zoom"><img src="assets/img/{img}" alt="{alt}" loading="lazy"></div>
     <div class="tile-b"><h3>{title}</h3><p>{body}</p>{link}</div>
   </article>''')
     out.append('</div>')
@@ -220,7 +220,7 @@ for i, (img, alt, title, anchor, txt) in enumerate(DEVICES):
     d = f' style="--d:{i*0.06:.2f}s"' if i else ''
     body += f'''
       <article class="tile rv" id="{anchor}"{d}>
-        <div class="tile-img tile-img--contain zoom" style="background:#fff"><img src="../assets/img/{img}" alt="{alt}" loading="lazy"></div>
+        <div class="tile-img tile-img--contain zoom" style="background:#fff"><img src="assets/img/{img}" alt="{alt}" loading="lazy"></div>
         <div class="tile-b"><h3>{title}</h3><p>{txt}</p>
           <a class="arrow-link" href="{WA}" target="_blank" rel="noopener">Get a free quote {ARROW}</a></div>
       </article>'''
@@ -231,7 +231,7 @@ body += f'''
 
 <section class="sec">
   <div class="wrap split">
-    <div class="split-media rv"><img src="../assets/img/ykl-work-3.jpg" alt="YKL technician working on a logic board under a microscope" loading="lazy"></div>
+    <div class="split-media rv"><img src="assets/img/ykl-work-3.jpg" alt="YKL technician working on a logic board under a microscope" loading="lazy"></div>
     <div class="split-copy">
       <p class="script rv" style="font-size:24px;color:var(--blue)">not a parts shop</p>
       <h2 class="h2 mask"><span>We repair boards, not just swap parts</span></h2>
@@ -263,7 +263,7 @@ team_html = '<div class="team-grid reveal-group">'
 for i,(img,name,role) in enumerate(TEAM):
     d = f' style="--d:{i*0.05:.2f}s"' if i else ''
     team_html += f'''
-      <div class="team-card rv"{d}><div class="ph"><img src="../assets/img/{img}" alt="{name}, {role} at YKL Mac Fix" loading="lazy"></div><b>{name}</b><small>{role}</small></div>'''
+      <div class="team-card rv"{d}><div class="ph"><img src="assets/img/{img}" alt="{name}, {role} at YKL Mac Fix" loading="lazy"></div><b>{name}</b><small>{role}</small></div>'''
 team_html += '\n    </div>'
 
 STORES = [
@@ -289,7 +289,7 @@ body += f'''
 
 <section class="sec">
   <div class="wrap split split--flip">
-    <div class="split-media rv"><img src="../assets/img/ykl-work-2.jpg" alt="YKL Mac Fix technician at the repair bench" loading="lazy"></div>
+    <div class="split-media rv"><img src="assets/img/ykl-work-2.jpg" alt="YKL Mac Fix technician at the repair bench" loading="lazy"></div>
     <div class="split-copy">
       <p class="script rv" style="font-size:24px;color:var(--blue)">who we are</p>
       <h2 class="h2 mask"><span>YKL One Hour Service Trading</span></h2>
@@ -342,7 +342,7 @@ for i,(anchor,name,img,addr,hours,tel_disp,tel,wa) in enumerate(BRANCHES):
     q = re.sub(r'&amp;|&ndash;|&middot;','',addr).replace(' ','+')
     branch_cards += f'''
       <article class="tile rv" id="{anchor}"{d}>
-        <div class="tile-img zoom"><img src="../assets/img/{img}" alt="{name} branch" loading="lazy"></div>
+        <div class="tile-img zoom"><img src="assets/img/{img}" alt="{name} branch" loading="lazy"></div>
         <div class="tile-b">
           <h3>{name}</h3>
           <p class="loc-row">{PIN}<span>{addr}</span></p>
@@ -435,7 +435,7 @@ for i,(href,img,title,cat,read,ex) in enumerate(POSTS):
     d = f' style="--d:{i*0.07:.2f}s"' if i else ''
     post_html += f'''
       <a class="post rv" href="{href}"{d}>
-        <div class="ph zoom"><img src="../assets/img/{img}" alt="{title}" loading="lazy"></div>
+        <div class="ph zoom"><img src="assets/img/{img}" alt="{title}" loading="lazy"></div>
         <div class="post-b"><p class="meta">{cat} &middot; {read}</p><h3>{title}</h3><p>{ex}</p>
         <span class="arrow-link">Read article {ARROW}</span></div>
       </a>'''

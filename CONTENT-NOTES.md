@@ -64,7 +64,7 @@ which were replaced with YKL's verified data:
 | Hours "Mon–Sat 10–7" | PJ Mon–Fri 10:30am–7:30pm, Sat–Sun 10:30am–6:00pm · both Kuantan branches Mon–Sat 11:00am–9:00pm | existing verified facts |
 
 ### BLOCKER before v2 goes anywhere near a live domain
-- **The three testimonials on `v2/index.html` are invented.** The quotes, the names (Sarah L., Adrian H.,
+- **The three testimonials on `index.html` are invented.** The quotes, the names (Sarah L., Adrian H.,
   Muhammad F.) and the locations were all written for the mockup. Publishing fabricated customer reviews on a
   real business's site is not a rough edge, it is a false statement about real people's experiences. Before
   launch, either paste three real reviews from the client's Google profile with the reviewers' actual display
@@ -74,7 +74,7 @@ which were replaced with YKL's verified data:
   across 1,190+ Google reviews", which matches what the client has actually published.
 
 ### Still TODO-confirm on v2
-- **Team roles** on `v2/about.html` (Senior technician, Board-level specialist, Mac technician,
+- **Team roles** on `about.html` (Senior technician, Board-level specialist, Mac technician,
   Diagnostics, Workshop lead, Front of house) are assumed. Confirm each person's actual title.
 - **The three blog articles** are original copy written for the mockup. They are factually
   conservative but have not been reviewed by the client.
@@ -84,7 +84,7 @@ which were replaced with YKL's verified data:
   this goes live.
 - **"Apple only"** positioning carries over from v1 and is still unconfirmed against the live site,
   which advertises all brands.
-- The booking form on `v2/contact.html` is a mock. It validates and shows a confirmation but sends
+- The booking form on `contact.html` is a mock. It validates and shows a confirmation but sends
   nothing.
 - **`og:image` and `og:url` need the final domain.** The 22 Sep pass added Open Graph and theme-color tags, but
   `og:image` points at a relative path and there is no `og:url` or `<link rel="canonical">` because the

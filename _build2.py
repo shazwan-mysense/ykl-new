@@ -65,7 +65,7 @@ def detail(fname, crumb, h1, lead, art, script, symptoms, prose, title, desc, fa
 def article(fname, cat, read, h1, lead, img, prose, title, desc):
     b = phero('<a href="blog.html">Blog</a><span>/</span>' + cat, h1, lead, plain=True, cta=False)
     b += '\n<section class="sec sec--band">\n  <div class="wrap rich">\n    <div class="prose rv">\n' \
-         + '      <img src="../assets/img/%s" alt="%s" loading="lazy" style="margin-top:0">\n' % (img, h1) \
+         + '      <img src="assets/img/%s" alt="%s" loading="lazy" style="margin-top:0">\n' % (img, h1) \
          + '      <p style="font-size:12.5px;color:var(--ink-50);margin-bottom:18px">%s &middot; %s</p>\n' % (cat, read) \
          + prose + '\n    </div>\n    ' + aside_block() + '\n  </div>\n</section>\n'
     write(fname, title, desc, b)
