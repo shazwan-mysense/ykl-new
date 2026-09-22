@@ -63,9 +63,17 @@ which were replaced with YKL's verified data:
 | "MacBook Neo" | not an Apple product. Device row is MacBook Air, MacBook Pro, iMac, Mac mini, iPad, iPhone | — |
 | Hours "Mon–Sat 10–7" | PJ Mon–Fri 10:30am–7:30pm, Sat–Sun 10:30am–6:00pm · both Kuantan branches Mon–Sat 11:00am–9:00pm | existing verified facts |
 
+### BLOCKER before v2 goes anywhere near a live domain
+- **The three testimonials on `v2/index.html` are invented.** The quotes, the names (Sarah L., Adrian H.,
+  Muhammad F.) and the locations were all written for the mockup. Publishing fabricated customer reviews on a
+  real business's site is not a rough edge, it is a false statement about real people's experiences. Before
+  launch, either paste three real reviews from the client's Google profile with the reviewers' actual display
+  names, or cut the section down to the rating line and the "Read all reviews" link, which are true. Do not
+  ship as-is.
+  The star ratings were removed in the 22 Sep craft pass and the rating is now stated once as "Rated Excellent
+  across 1,190+ Google reviews", which matches what the client has actually published.
+
 ### Still TODO-confirm on v2
-- **Testimonials** on `v2/index.html` are reconstructed, not verbatim Google reviews. Replace with
-  real quotes (or a live Google reviews widget) before launch.
 - **Team roles** on `v2/about.html` (Senior technician, Board-level specialist, Mac technician,
   Diagnostics, Workshop lead, Front of house) are assumed. Confirm each person's actual title.
 - **The three blog articles** are original copy written for the mockup. They are factually
@@ -78,3 +86,11 @@ which were replaced with YKL's verified data:
   which advertises all brands.
 - The booking form on `v2/contact.html` is a mock. It validates and shows a confirmation but sends
   nothing.
+- **`og:image` and `og:url` need the final domain.** The 22 Sep pass added Open Graph and theme-color tags, but
+  `og:image` points at a relative path and there is no `og:url` or `<link rel="canonical">` because the
+  production domain is not decided. Both need filling in at launch or link previews will be broken.
+- **The favicon is the 1500x570 wordmark**, which renders as an illegible smear at 16px. A square mark needs
+  exporting before launch.
+- Service-page copy asserts specific workshop capabilities (ultrasonic cleaning, stereo-microscope bench,
+  panels kept in stock, BGA reballing). Board-level repair and reball are confirmed; the rest were written to
+  describe a normal Apple repair workflow and should be confirmed with the client before launch.
