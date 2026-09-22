@@ -11,6 +11,7 @@
   --ink-70:#475467;
   --ink-50:#667085;
   --line:#E4E9F0;
+  --ink-20:#C3CBD6;   /* unlit state of the scrubbed statement; a tint of --ink, not a new hue */
   --band:#F5F7F9;
   --band-2:#F2F7FA;
   --dark:#030505;
@@ -117,7 +118,7 @@ h1,h2,h3,h4{line-height:1.15;letter-spacing:-.022em;font-weight:700}
   transition:opacity .3s var(--e),transform .3s var(--e),visibility .3s;
 }
 .drawer.open{opacity:1;visibility:visible;transform:none}
-.drawer h4{font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-50);margin:22px 0 8px;font-weight:700}
+.drawer h4{font-size:14px;color:var(--ink-50);margin:26px 0 8px;font-weight:600}
 .drawer a{display:block;padding:11px 0;font-size:17px;font-weight:600;border-bottom:1px solid var(--line)}
 .drawer .btn{margin-top:26px;width:100%}
 body.locked{overflow:hidden}
@@ -273,7 +274,7 @@ body.locked{overflow:hidden}
 /* footer */
 .ft{background:#0B0F16;color:rgba(255,255,255,.62);padding:clamp(44px,5vw,64px) 0 28px;font-size:14px}
 .ft-top{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.3fr;gap:32px}
-.ft h5{color:#fff;font-size:12px;letter-spacing:.09em;text-transform:uppercase;margin-bottom:14px;font-weight:700}
+.ft h5{color:#fff;font-size:14px;margin-bottom:16px;font-weight:600}
 .ft ul{display:flex;flex-direction:column;gap:9px}
 .ft a{transition:color .2s}
 .ft a:hover{color:#fff}
@@ -527,7 +528,7 @@ ul.ticks li::before{content:"";flex:none;width:19px;height:19px;margin-top:2px;b
   max-width:24ch;color:var(--ink);
 }
 .say--wide{max-width:34ch}
-.say w{color:#C3CBD6;transition:color .34s ease}
+.say w{color:var(--ink-20);transition:color .34s ease}
 .say w.lit{color:var(--ink)}
 .say w.blue.lit{color:var(--blue)}
 @media (prefers-reduced-motion:reduce){.say w{color:var(--ink)}.say w.blue{color:var(--blue)}}
@@ -792,3 +793,212 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
   .hero .wrap{grid-template-columns:1fr}
   .hero-art{max-width:520px;margin-right:0}
 }
+
+/* ============================================================================
+   CORRECTIONS from the design audit
+   ========================================================================== */
+
+/* ---- 28. the user's own rule: no ALL-CAPS letterspaced micro-labels.
+   These two were shipping on every page, in the footer and the mobile menu. ---- */
+.ft h5{font-size:14px;font-weight:600;letter-spacing:normal;text-transform:none;margin-bottom:16px}
+.drawer h4{font-size:14px;font-weight:600;letter-spacing:normal;text-transform:none;color:var(--ink-50);margin:26px 0 8px}
+
+/* ---- 29. an inner page's own H1 must outrank the sections under it.
+   Enlarging .h2 in the craft layer had inverted this. ---- */
+.phero h1{font-size:clamp(34px,4.7vw,57px);line-height:1.05;letter-spacing:-.032em;max-width:16ch}
+
+/* ---- 30. section heading tiers, so not every section shouts equally ---- */
+.h2--sub{font-size:clamp(23px,2.5vw,32px);font-weight:700;letter-spacing:-.026em}
+
+/* ---- 31. make .h3 real, and stop labels impersonating headings ---- */
+h3,.h3{font-size:17px;font-weight:700;letter-spacing:-.006em;line-height:1.3}
+.svc-b h3{font-size:16px}
+.rows-b b,.proc-i b,.trust-i b,.dev b,.team-card b{line-height:1.3}
+
+/* ---- 32. tracking by optical size, not by tag. Small print needs positive
+   tracking in Inter; only display sizes want negative. ---- */
+.ubar,.dev-sub,.post-b .meta,.fnote,.ft-base,.brand small,.trust-i small,.crumb{letter-spacing:.012em}
+.rev p{letter-spacing:normal}
+.rows-b b,.proc-i b,.trust-i b,.dev b,.team-card b,.faq-q,.loc-b h3,.tile-b h3,.post-b h3{letter-spacing:-.006em}
+
+/* ---- 33. leading ramp: narrow columns need more, one-line labels need less ---- */
+.svc-b p,.proc-i p,.rows-b span{font-size:13.5px;line-height:1.55}
+.faq-a p{line-height:1.62}
+@media (max-width:760px){.h1{line-height:1.1}.h2{line-height:1.13}}
+
+/* ---- 34. rag and widow control ---- */
+.h1,.h2,.say,.hero-sub,.lead,.faq-aside h2,.cta h2,.phero h1,.rows-b b{text-wrap:balance}
+.prose p,.svc-b p,.proc-i p,.rows-b span,.rev p,.faq-a p,.loc-b address,.loc-note,.tile-b p{text-wrap:pretty}
+
+/* ---- 35. measure: ch over-delivers by roughly a third in Inter ---- */
+.prose p,ul.ticks{max-width:56ch}
+ul.ticks li{font-size:15.5px;line-height:1.55}
+.faq-a p{max-width:44ch}
+.phero p.lead{max-width:44ch}
+.split-copy p{max-width:42ch}
+.rows-b span{max-width:38ch}
+.cta p{max-width:38ch}
+.loc-note{font-size:14.5px;line-height:1.55;color:var(--ink-70);max-width:34ch;margin-bottom:16px}
+
+/* ---- 36. in-flow links had no character at all ---- */
+.rows-b span a,.loc-row a,.crumb a,.abox ul a,.ft-base a{
+  text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.18em;
+  text-decoration-color:rgba(1,113,253,.34);transition:text-decoration-color .2s;
+}
+.rows-b span a,.abox ul a{color:var(--blue)}
+.rows-b span a:hover,.loc-row a:hover,.abox ul a:hover{text-decoration-color:var(--blue)}
+
+/* ---- 37. scroll-progress bar: on-palette, and only once you are reading ---- */
+.sprog{height:2px;background:var(--blue);opacity:0;transition:opacity .3s}
+.sprog.on{opacity:1}
+
+/* ---- 38. reduced motion: the process line was still animating ---- */
+@media (prefers-reduced-motion:reduce){
+  .rv,.mask>*,.zoom img,.hero-script u,.proc-i::after,.proc-track i,.words w,.say w{
+    opacity:1!important;transform:none!important;transition:none!important;
+  }
+  .sprog{display:none}
+}
+
+/* ---- 39. three container widths instead of one. (Not viewport units: 100vw
+   includes the scrollbar and would reintroduce horizontal overflow.) ---- */
+.wrap--narrow{max-width:900px}
+.wrap--wide{max-width:1400px}
+
+/* ---- 40. commit to the asymmetry instead of decimals that compute to centre ---- */
+.loc-why{grid-template-columns:1.32fr .68fr}
+.hero .wrap{grid-template-columns:1.18fr .82fr}
+@media (max-width:1100px){.loc-why{grid-template-columns:1fr}}
+
+/* ---- 41. let the bench photo run past the gutter, like the hero does ---- */
+.why-art{margin-right:calc(-1 * clamp(14px,3.4vw,56px))}
+@media (max-width:1100px){.why-art{margin-right:0}}
+
+/* ---- 42. services: three across at 3:2, which is the native ratio of the
+   client's photographs, so nothing is cropped and the technician is legible ---- */
+.svc-grid{grid-template-columns:repeat(3,1fr);gap:clamp(20px,2.4vw,34px) clamp(18px,2vw,28px)}
+.svc-img{aspect-ratio:3/2}
+.svc-b h3{font-size:17.5px}
+.svc-b p{max-width:40ch}
+@media (max-width:900px){.svc-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.svc-grid{grid-template-columns:1fr}}
+
+/* the device strip then becomes the thin index it should be, not a third card row */
+.dev-ph{height:clamp(74px,7.4vw,96px)}
+
+/* ---- 43. the handwritten note sits BESIDE the photograph, never on it.
+   House rule: client photography is never covered, tinted or obscured. ---- */
+.why-art{display:flex;flex-direction:column;align-items:flex-end}
+.why-script{
+  position:static;background:transparent;padding:0;border-radius:0;
+  margin:12px clamp(14px,3.4vw,56px) 0 0;text-align:right;transform:rotate(-1.5deg);
+  color:var(--ink-70);
+}
+/* the pickup panel needs to read as a panel inside a tinted band */
+.loc--cta{background:#fff;border:1px solid var(--line)}
+
+/* ============================================================================
+   DEFECTS found by the audit — including several the craft layer introduced
+   ========================================================================== */
+
+/* ---- 44. the row-dim was firing on the container, gutters included, so every
+   card sat at .42 whenever the pointer merely crossed the section. That put
+   .svc-b p at roughly 2:1 contrast. Gate it on a card actually being hovered,
+   and lift the floor so the quieted cards stay readable. ---- */
+@media (hover:hover){
+  .svc-grid:hover .svc,.dev-grid:hover .dev,.rev-grid:hover .rev{opacity:1}
+  .svc-grid:has(.svc:hover) .svc,.dev-grid:has(.dev:hover) .dev{opacity:.72}
+  .svc-grid:has(.svc:hover) .svc:hover,.dev-grid:has(.dev:hover) .dev:hover{opacity:1}
+}
+
+/* ---- 45. the hover zoom was dead on every photo: `.zoom.in img{transform:scale(1)}`
+   is declared after the hover rules at the same specificity, so it won.
+   Move the scale onto a custom property so the two stop fighting. ---- */
+.zoom img{--z:1.14;transform:scale(var(--z));transition:transform 1.3s var(--e)}
+.zoom.in img{--z:1}
+.svc:hover .svc-img img,.loc:hover .loc-img img,.tile:hover .tile-img img,
+.post:hover .ph img,.team-card:hover img{--z:1.055;transform:scale(var(--z));transition:transform .8s var(--e)}
+
+/* ---- 46. the focus ring was overriding each element's own corner radius,
+   so tabbing to a button snapped it from 8px to 3px. ---- */
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{
+  border-radius:inherit;
+}
+
+/* ---- 47. nothing on the page is visible until JavaScript adds .in. One bad
+   asset path after a deploy rendered a blank site. Hidden states now only
+   apply once JS has confirmed itself (see the inline script in <head>). ---- */
+.rv{opacity:1;transform:none}
+.js .rv{opacity:0;transform:translateY(26px)}
+.js .rv.in{opacity:1;transform:none}
+.mask>*{transform:none}
+.js .mask>*{transform:translateY(105%)}
+.js .mask.in>*{transform:none}
+.zoom img{--z:1}
+.js .zoom img{--z:1.14}
+.js .zoom.in img{--z:1}
+.words w{opacity:1;transform:none}
+.js .words w{opacity:0;transform:translateY(.5em) rotate(1.2deg)}
+.js .words.in w{opacity:1;transform:none}
+.say w{color:var(--ink)}
+.js .say w{color:var(--ink-20)}
+.js .say w.lit{color:var(--ink)}
+.js .say w.blue.lit{color:var(--blue)}
+.hero-script u{transform:scaleX(1)}
+.js .hero-script u{transform:scaleX(0)}
+.js .hero-script.in u{transform:scaleX(1)}
+.proc-track i{transform:scaleX(1)}
+.js .proc-track i{transform:scaleX(0)}
+.js .proc-track.in i{transform:scaleX(1)}
+.proc-i::before{transform:scale(1)}
+.js .proc-i::before{transform:scale(0)}
+.js .proc-track.in ~ .proc .proc-i::before{transform:scale(1)}
+@media (prefers-reduced-motion:reduce){
+  .js .rv,.js .mask>*,.js .zoom img,.js .words w,.js .hero-script u,
+  .js .proc-track i,.js .proc-i::before{
+    opacity:1!important;transform:none!important;transition:none!important;
+  }
+  .js .say w{color:var(--ink)}
+  .js .say w.blue{color:var(--blue)}
+}
+
+/* ---- 48. every inner page switched design language: the homepage services row
+   was de-carded but .tile stayed a white bordered rounded hover-lift card. ---- */
+.tile{background:transparent;border:0;border-radius:0;overflow:visible}
+.tile:hover{transform:none;box-shadow:none;border-color:transparent}
+.tile-img{border-radius:10px;aspect-ratio:3/2}
+.tile-b{padding:14px 0 0}
+.tile-b h3{font-size:17.5px}
+.tile-b p{font-size:13.5px;line-height:1.55;max-width:40ch}
+.tiles{gap:clamp(20px,2.4vw,34px) clamp(18px,2vw,28px);border-top:1px solid var(--line);padding-top:clamp(20px,2.2vw,30px)}
+.tile-img--contain{background:transparent;padding:clamp(14px,1.8vw,26px)}
+.post{background:transparent;border:0;border-radius:0}
+.post:hover{transform:none;box-shadow:none}
+.post .ph{border-radius:10px;aspect-ratio:3/2}
+.post-b{padding:14px 0 0}
+.post-grid{gap:clamp(22px,2.6vw,36px) clamp(18px,2vw,28px);border-top:1px solid var(--line);padding-top:clamp(20px,2.2vw,30px)}
+
+/* ---- 49. nine hand-typed colours had crept in beside the fixed token set,
+   including three unrelated near-blacks. Everything back onto the tokens. ---- */
+.ft{background:var(--dark)}
+.svc-img,.tile-img{background:var(--bar)}
+.tile{border-color:var(--line)}
+.post{border-color:var(--line)}
+
+/* ---- 50. reviews: the rating is stated once in the header, so fifteen
+   identical gold stars stop being the loudest thing in the section. One quote
+   leads at display size and the other two sit beside it. ---- */
+.rev-grid{grid-template-columns:1.5fr 1fr;gap:0}
+.rev--lead{grid-row:span 2;border-right:1px solid var(--line);justify-content:center}
+.rev--lead p{font-size:clamp(19px,1.85vw,25px);line-height:1.38;letter-spacing:-.022em}
+.rev{border-right:0}
+.rev-who{margin-top:2px}
+@media (max-width:900px){
+  .rev-grid{grid-template-columns:1fr}
+  .rev--lead{grid-row:auto;border-right:0}
+}
+
+/* the lead quote's attribution should follow its quote, not float to the bottom */
+.rev--lead{justify-content:flex-start}
+.rev--lead p{flex:0 1 auto}
+.rev--lead .rev-who{margin-top:14px}

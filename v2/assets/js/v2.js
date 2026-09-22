@@ -36,6 +36,7 @@
     if (hdr) hdr.classList.toggle('stuck', y > 8);
     var h = document.documentElement.scrollHeight - window.innerHeight;
     prog.style.transform = 'scaleX(' + (h > 0 ? Math.min(y / h, 1) : 0) + ')';
+    prog.classList.toggle('on', y > 8);
     parallax(y);
     scrubSays();
   }
@@ -100,12 +101,16 @@
   }
 
   /* ---------- count-ups ---------- */
-  function fmt(n) {
-    if (n >= 1000000) {
-      var m = n / 1000000;
-      return (m >= 10 ? Math.round(m) : Math.round(m * 10) / 10) + 'M';
+  /* Format in the unit the FINAL value will use for the whole run, so a counter
+     never tweens through 7-digit numbers and then snaps to "1M" on the last frame. */
+  function fmtFor(target) {
+    if (target >= 1000000) {
+      return function (n) {
+        var m = n / 1000000;
+        return (m >= 10 ? Math.round(m) : Math.round(m * 10) / 10) + 'M';
+      };
     }
-    return Math.round(n).toLocaleString('en-US');
+    return function (n) { return Math.round(n).toLocaleString('en-US'); };
   }
   var counted = false;
   function countUp(root) {
@@ -113,8 +118,11 @@
     Array.prototype.forEach.call(root.querySelectorAll('[data-count]'), function (el) {
       var to = parseFloat(el.getAttribute('data-count')) || 0;
       var sfx = el.getAttribute('data-suffix') || '';
+      var fmt = fmtFor(to);
       if (!motionOK) { el.textContent = fmt(to) + sfx; return; }
-      var t0 = null, dur = 1500;
+      /* a 3 should land quickly; 1,190 deserves its moment */
+      var dur = 620 + 190 * String(Math.round(to)).length;
+      var t0 = null;
       requestAnimationFrame(function step(t) {
         if (t0 === null) t0 = t;
         var p = Math.min((t - t0) / dur, 1);
@@ -157,6 +165,15 @@
     if (a.getAttribute('href') === here) a.parentNode.classList.add('on');
   });
 
+
+  /* ---------- .reveal-group stages its own children ---------- */
+  Array.prototype.forEach.call(document.querySelectorAll('.reveal-group'), function (grp) {
+    var kids = grp.querySelectorAll(':scope > .rv');
+    Array.prototype.forEach.call(kids, function (k, i) {
+      if (k.style.getPropertyValue('--d')) return;   // an explicit delay wins
+      k.style.setProperty('--d', (i * 0.055).toFixed(3) + 's');
+    });
+  });
   /* ---------- split text into <w> words, preserving inline markup ---------- */
   function splitWords(root) {
     if (root.dataset.split) return;

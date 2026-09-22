@@ -8,6 +8,10 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 os.chdir(HERE)
 idx = open('index.html', encoding='utf-8').read()
 
+# The cache-buster is whatever index.html is currently stamped with, so the 12 generated
+# pages can never drift onto a stale stylesheet after index.html is bumped by hand.
+VER = re.search(r'v2\.css\?v=([0-9a-z]+)', idx).group(1)
+
 def between(a, b):
     i = idx.index(a); j = idx.index(b)
     return idx[i:j]
@@ -17,17 +21,25 @@ PROCESS = between('<!-- ============ PROCESS ============ -->', '<!-- ==========
 FOOTER  = idx[idx.index('<!-- ============ FOOTER ============ -->'):]
 
 HEAD = '''<!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
 <meta charset="utf-8">
+<script>document.documentElement.className="js"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{title}</title>
 <meta name="description" content="{desc}">
+<meta name="theme-color" content="#0171FD">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="YKL Mac Fix">
+<meta property="og:title" content="{title}">
+<meta property="og:description" content="{desc}">
+<meta property="og:image" content="../assets/img/ykl-work-3.jpg">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="../assets/img/ykl-logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/v2.css?v=20260921a">
+<link rel="stylesheet" href="assets/css/v2.css?v={ver}">
 </head>
 <body>
 
@@ -71,15 +83,16 @@ def phero(crumb, h1, lead, art=None, script=None, plain=False, cta=True):
     s += '\n  </div>\n</section>\n'
     return s
 
-def sec_head(script, h2, lead=None, link=None, center=False):
+def sec_head(script, h2, lead=None, link=None, center=False, tier='main'):
     """`script` is kept in the signature for the existing call sites but is no longer
     rendered: one handwritten accent per page reads as a signature, eight reads as a
     template. Section openers are separated by a hairline rule instead (see the craft
     layer in v2.css)."""
     cls = 'sec-head sec-head--center' if center else 'sec-head'
+    h2cls = 'h2 h2--sub mask' if tier == 'sub' else 'h2 mask'
     s = f'''<div class="{cls}">
       <div>
-        <h2 class="h2 mask"><span>{h2}</span></h2>'''
+        <h2 class="{h2cls}"><span>{h2}</span></h2>'''
     if lead:
         s += f'\n        <p class="lead rv" style="--d:.1s;max-width:58ch;margin-top:12px">{lead}</p>'
     s += '\n      </div>'
@@ -122,7 +135,7 @@ CTA = '''<!-- CTA -->
 '''
 
 def write(name, title, desc, body):
-    html = HEAD.format(title=title, desc=desc) + HEADER + body + CTA + FOOTER
+    html = HEAD.format(title=title, desc=desc, ver=VER) + HEADER + body + CTA + FOOTER
     open(name, 'w', encoding='utf-8').write(html)
     print('wrote', name, len(html), 'bytes')
 
@@ -161,7 +174,7 @@ body += f'''
 
 <section class="sec">
   <div class="wrap">
-    {sec_head('common symptoms', 'Tell us what it is doing', 'Most people describe a symptom, not a part. That is exactly how we take it in.')}
+    {sec_head('common symptoms', 'Tell us what it is doing', 'Most people describe a symptom, not a part. That is exactly how we take it in.', tier='sub')}
     <div class="sym rv">
       <span>Will not turn on</span><span>Black screen but the fan runs</span><span>Battery swollen</span>
       <span>Trackpad will not click</span><span>Keys repeating</span><span>Spilled water or coffee</span>
@@ -201,7 +214,7 @@ body = phero('Devices', 'Apple devices we repair',
 body += f'''
 <section class="sec sec--band">
   <div class="wrap">
-    {sec_head('the full line-up', 'Pick your device', 'Every one of these is diagnosed free before we quote you.')}
+    {sec_head('the full line-up', 'Pick your device', 'Every one of these is diagnosed free before we quote you.', tier='sub')}
     <div class="tiles reveal-group">'''
 for i, (img, alt, title, anchor, txt) in enumerate(DEVICES):
     d = f' style="--d:{i*0.06:.2f}s"' if i else ''
@@ -294,14 +307,14 @@ body += f'''
 
 <section class="sec sec--band2">
   <div class="wrap">
-    {sec_head('the people on the bench', 'Meet the team', 'The same faces you will hand your Mac to.')}
+    {sec_head('the people on the bench', 'Meet the team', 'The same faces you will hand your Mac to.', tier='sub')}
     {team_html}
   </div>
 </section>
 
 <section class="sec">
   <div class="wrap">
-    {sec_head('inside the shop', 'Our workshop')}
+    {sec_head('inside the shop', 'Our workshop', tier='sub')}
     {tiles(STORES, 3)}
   </div>
 </section>
@@ -400,7 +413,7 @@ body += f'''
 
 <section class="sec">
   <div class="wrap">
-    {sec_head('three branches', 'Where to find us', 'Walk in during opening hours. No appointment needed.')}
+    {sec_head('three branches', 'Where to find us', 'Walk in during opening hours. No appointment needed.', tier='sub')}
     {branch_cards}
   </div>
 </section>
@@ -434,7 +447,7 @@ body = phero('Blog', 'Notes from the bench',
 body += f'''
 <section class="sec sec--band">
   <div class="wrap">
-    {sec_head('latest', 'Articles')}
+    {sec_head('latest', 'Articles', tier='sub')}
     {post_html}
   </div>
 </section>
