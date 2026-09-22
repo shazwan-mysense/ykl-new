@@ -633,7 +633,7 @@ ul.ticks li::before{content:"";flex:none;width:19px;height:19px;margin-top:2px;b
 .bleed{width:100vw;margin-left:calc(50% - 50vw)}
 .rule{height:1px;background:var(--line);width:100%}
 a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{
-  outline:2px solid var(--blue);outline-offset:3px;border-radius:3px;
+  outline:2px solid var(--blue);outline-offset:3px;
 }
 .arrow-link{position:relative}
 .arrow-link::after{
@@ -798,10 +798,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
    CORRECTIONS from the design audit
    ========================================================================== */
 
-/* ---- 28. the user's own rule: no ALL-CAPS letterspaced micro-labels.
-   These two were shipping on every page, in the footer and the mobile menu. ---- */
-.ft h5{font-size:14px;font-weight:600;letter-spacing:normal;text-transform:none;margin-bottom:16px}
-.drawer h4{font-size:14px;font-weight:600;letter-spacing:normal;text-transform:none;color:var(--ink-50);margin:26px 0 8px}
+/* ---- 28. the user's own rule, no ALL-CAPS letterspaced micro-labels, is now
+   applied directly to .ft h5 and .drawer h4 above rather than overridden here. ---- */
 
 /* ---- 29. an inner page's own H1 must outrank the sections under it.
    Enlarging .h2 in the craft layer had inverted this. ---- */
@@ -919,11 +917,9 @@ ul.ticks li{font-size:15.5px;line-height:1.55}
 .svc:hover .svc-img img,.loc:hover .loc-img img,.tile:hover .tile-img img,
 .post:hover .ph img,.team-card:hover img{--z:1.055;transform:scale(var(--z));transition:transform .8s var(--e)}
 
-/* ---- 46. the focus ring was overriding each element's own corner radius,
-   so tabbing to a button snapped it from 8px to 3px. ---- */
-a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{
-  border-radius:inherit;
-}
+/* ---- 46. the focus ring set border-radius on the element, so tabbing to a
+   button snapped its 8px corners to 3px. The declaration is deleted from the
+   base rule above rather than overridden here. ---- */
 
 /* ---- 47. nothing on the page is visible until JavaScript adds .in. One bad
    asset path after a deploy rendered a blank site. Hidden states now only
@@ -1002,3 +998,37 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .rev--lead{justify-content:flex-start}
 .rev--lead p{flex:0 1 auto}
 .rev--lead .rev-who{margin-top:14px}
+
+/* ============================================================================
+   FINAL PASS — issues the adversarial verifiers raised against the live files
+   ========================================================================== */
+
+/* ---- 51. the row hover-dim is gone entirely. Even gated and floored at .72 it
+   put 13.5px #667085 card copy under the 4.5:1 contrast minimum, and the card
+   already signals hover three other ways (title colour, image zoom, arrow).
+   A decorative effect is not worth an accessibility regression. ---- */
+@media (hover:hover){
+  .svc-grid:hover .svc,.dev-grid:hover .dev,.rev-grid:hover .rev,
+  .svc-grid:has(.svc:hover) .svc,.dev-grid:has(.dev:hover) .dev{opacity:1}
+}
+
+/* ---- 52. the hero photograph had three treatments stacked on it: a screen
+   blend, a radial mask and a 35% black wash. The wash is gone; the blend and
+   mask stay because the source is a JPEG on black and needs both. ---- */
+.hero::after{background:none}
+
+/* ---- 53. a blue underline at 34% alpha is invisible on the near-black
+   footer and page heroes. Links in dark context get a light one. ---- */
+.crumb a,.ft-base a{text-decoration-color:rgba(255,255,255,.34)}
+.crumb a:hover,.ft-base a:hover{text-decoration-color:#fff}
+
+/* ---- 54. the three container widths were declared and then never used, so
+   every section on the page still measured the same 1240px. ---- */
+.faq-split,.prose,.say{max-width:var(--maxw-narrow,900px)}
+.say{max-width:none}
+.say--wide{max-width:900px}
+.rich .prose{max-width:none}
+.dev-row{max-width:var(--maxw-wide,1400px);margin-inline:auto}
+
+/* ---- 55. the base focus rule still set an explicit radius; the later one
+   corrects it, but leaving both means editing the wrong one does nothing. ---- */

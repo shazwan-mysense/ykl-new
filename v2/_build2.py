@@ -41,10 +41,10 @@ def detail(fname, crumb, h1, lead, art, script, symptoms, prose, title, desc, fa
     b = phero(crumb, h1, lead, art=art, script=script)
     if symptoms:
         chips = ''.join('<span>%s</span>' % s for s in symptoms)
-        b += '\n<section class="sec" style="padding-bottom:0">\n  <div class="wrap">\n    ' \
+        b += '\n<section class="sec sec--tight" style="padding-bottom:0">\n  <div class="wrap">\n    ' \
              + sec_head('sound familiar?', 'Symptoms we see most', center=True, tier='sub') \
              + '\n    <div class="sym rv" style="justify-content:center">' + chips + '</div>\n  </div>\n</section>\n'
-    b += '\n<section class="sec sec--band">\n  <div class="wrap rich">\n    <div class="prose rv">' \
+    b += '\n<section class="sec sec--airy sec--band">\n  <div class="wrap rich">\n    <div class="prose rv">' \
          + prose + '</div>\n    ' + aside_block() + '\n  </div>\n</section>\n'
     if faq:
         items = ''.join(

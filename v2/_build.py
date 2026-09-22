@@ -165,14 +165,14 @@ body = phero('Mac Repair', 'Every Apple repair, under one roof',
   'Screens, batteries, boards and spills. Diagnosed free at our own bench, quoted before anything is opened, and covered by up to 5 years warranty.',
   art='ykl-work-6.jpg', script='we open it,<br>we own it')
 body += f'''
-<section class="sec sec--band">
+<section class="sec sec--airy sec--band">
   <div class="wrap">
     {sec_head('what we fix', 'Mac repair services', 'Nine of the jobs we handle most. If your symptom is not listed, message us and describe it.')}
     {tiles(SERVICES, 3)}
   </div>
 </section>
 
-<section class="sec">
+<section class="sec sec--tight">
   <div class="wrap">
     {sec_head('common symptoms', 'Tell us what it is doing', 'Most people describe a symptom, not a part. That is exactly how we take it in.', tier='sub')}
     <div class="sym rv">
@@ -305,14 +305,14 @@ body += f'''
   </div>
 </section>
 
-<section class="sec sec--band2">
+<section class="sec sec--airy sec--band2">
   <div class="wrap">
     {sec_head('the people on the bench', 'Meet the team', 'The same faces you will hand your Mac to.', tier='sub')}
     {team_html}
   </div>
 </section>
 
-<section class="sec">
+<section class="sec sec--tight">
   <div class="wrap">
     {sec_head('inside the shop', 'Our workshop', tier='sub')}
     {tiles(STORES, 3)}
