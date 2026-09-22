@@ -72,13 +72,16 @@ def phero(crumb, h1, lead, art=None, script=None, plain=False, cta=True):
     return s
 
 def sec_head(script, h2, lead=None, link=None, center=False):
-    st = ' style="justify-content:center;text-align:center"' if center else ''
-    s = f'''<div class="sec-head"{st}>
+    """`script` is kept in the signature for the existing call sites but is no longer
+    rendered: one handwritten accent per page reads as a signature, eight reads as a
+    template. Section openers are separated by a hairline rule instead (see the craft
+    layer in v2.css)."""
+    cls = 'sec-head sec-head--center' if center else 'sec-head'
+    s = f'''<div class="{cls}">
       <div>
-        <p class="script rv" style="font-size:24px;color:var(--blue)">{script}</p>
         <h2 class="h2 mask"><span>{h2}</span></h2>'''
     if lead:
-        s += f'\n        <p class="lead rv" style="--d:.1s;max-width:60ch;margin-top:10px">{lead}</p>'
+        s += f'\n        <p class="lead rv" style="--d:.1s;max-width:58ch;margin-top:12px">{lead}</p>'
     s += '\n      </div>'
     if link:
         href, label = link
@@ -105,7 +108,7 @@ CTA = '''<!-- CTA -->
   <div class="wrap">
     <div class="cta rv">
       <div>
-        <h2 class="h2">Send us a photo. Get a price today.</h2>
+        <h2 class="h2">Send us a photo. <span class="acc">Get a price today.</span></h2>
         <p>Free diagnostics at all three branches. Tell us the symptom and we will tell you what it takes to fix it.</p>
       </div>
       <div class="cta-btns">
@@ -262,11 +265,11 @@ body = phero('About Us', 'Mac specialists, not a general phone shop',
 body += f'''
 <section class="sec sec--band">
   <div class="wrap">
-    <div class="stats rv" id="stats">
-      <div class="stat"><span class="n" data-count="1190" data-suffix="+">0</span><small>Google reviews</small></div>
-      <div class="stat"><span class="n" data-count="1000000" data-suffix="+">0</span><small>TikTok views</small></div>
-      <div class="stat"><span class="n" data-count="3" data-suffix="">0</span><small>Branches in Malaysia</small></div>
-      <div class="stat"><span class="n" data-count="5" data-suffix=" yrs">0</span><small>Warranty, up to</small></div>
+    <div class="rows reveal-group" id="stats">
+      <div class="rows-i rv"><span class="rows-n n" data-count="1190" data-suffix="+">0</span><div class="rows-b"><b>Google reviews</b><span>Rated Excellent by customers across all three branches.</span></div></div>
+      <div class="rows-i rv" style="--d:.06s"><span class="rows-n n" data-count="1000000" data-suffix="+">0</span><div class="rows-b"><b>Views on TikTok</b><span>People watch us take Macs apart at <a href="https://www.tiktok.com/@yklmacfix" target="_blank" rel="noopener">@yklmacfix</a>.</span></div></div>
+      <div class="rows-i rv" style="--d:.12s"><span class="rows-n n" data-count="3" data-suffix="">0</span><div class="rows-b"><b>Branches in Malaysia</b><span>Petaling Jaya and two in Kuantan, all with the same bench standard.</span></div></div>
+      <div class="rows-i rv" style="--d:.18s"><span class="rows-n n" data-count="5" data-suffix="">0</span><div class="rows-b"><b>Years of warranty, up to</b><span>On selected repairs and upgrades, stated on your invoice.</span></div></div>
     </div>
   </div>
 </section>

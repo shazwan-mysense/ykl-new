@@ -37,6 +37,7 @@
     var h = document.documentElement.scrollHeight - window.innerHeight;
     prog.style.transform = 'scaleX(' + (h > 0 ? Math.min(y / h, 1) : 0) + ')';
     parallax(y);
+    scrubSays();
   }
   window.addEventListener('scroll', onScroll, { passive: true });
 
@@ -75,7 +76,7 @@
   window.addEventListener('resize', function () { if (window.innerWidth > 980) closeDrawer(); });
 
   /* ---------- scroll reveals ---------- */
-  var targets = document.querySelectorAll('.rv, .mask, .zoom, .proc, .hero-script');
+  var targets = document.querySelectorAll('.rv, .mask, .zoom, .proc, .proc-track, .words, .hero-script, #stats');
   if (!motionOK || !('IntersectionObserver' in window)) {
     Array.prototype.forEach.call(targets, function (el) { el.classList.add('in'); });
   } else {
@@ -155,6 +156,63 @@
   Array.prototype.forEach.call(document.querySelectorAll('.nav > li > a'), function (a) {
     if (a.getAttribute('href') === here) a.parentNode.classList.add('on');
   });
+
+  /* ---------- split text into <w> words, preserving inline markup ---------- */
+  function splitWords(root) {
+    if (root.dataset.split) return;
+    root.dataset.split = '1';
+    var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null);
+    var nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+    nodes.forEach(function (node) {
+      if (!node.nodeValue.trim()) return;
+      var frag = document.createDocumentFragment();
+      node.nodeValue.split(/(\s+)/).forEach(function (chunk) {
+        if (!chunk) return;
+        if (!chunk.trim()) { frag.appendChild(document.createTextNode(chunk)); return; }
+        var w = document.createElement('w');
+        w.textContent = chunk;
+        if (node.parentNode && node.parentNode.classList &&
+            node.parentNode.classList.contains('acc')) w.className = 'blue';
+        frag.appendChild(w);
+      });
+      node.parentNode.replaceChild(frag, node);
+    });
+  }
+
+  /* ---------- per-word headline reveal ---------- */
+  Array.prototype.forEach.call(document.querySelectorAll('.words'), function (el) {
+    splitWords(el);
+    Array.prototype.forEach.call(el.querySelectorAll('w'), function (w, i) {
+      w.style.transitionDelay = (i * 0.045).toFixed(3) + 's';
+    });
+  });
+
+  /* ---------- scroll-scrubbed statement: words ink up as you pass ---------- */
+  var says = [];
+  Array.prototype.forEach.call(document.querySelectorAll('.say'), function (el) {
+    splitWords(el);
+    var ws = Array.prototype.slice.call(el.querySelectorAll('w'));
+    if (!ws.length) return;
+    if (!motionOK) { ws.forEach(function (w) { w.classList.add('lit'); }); return; }
+    says.push({ el: el, ws: ws, lit: -1 });
+  });
+  function scrubSays() {
+    if (!says || !says.length) return;
+    var vh = window.innerHeight || document.documentElement.clientHeight || 800;
+    says.forEach(function (s) {
+      var r = s.el.getBoundingClientRect();
+      /* 0 when the block's top hits 82% of the viewport, 1 when it reaches 34% */
+      var p = (vh * 0.82 - r.top) / (vh * 0.48);
+      p = Math.max(0, Math.min(1, p));
+      var n = Math.round(p * s.ws.length);
+      if (n === s.lit) return;
+      for (var i = 0; i < s.ws.length; i++) s.ws[i].classList.toggle('lit', i < n);
+      s.lit = n;
+    });
+  }
+
+  /* ---------- process: the hairline draws once, in view ---------- */
 
   /* ---------- mock booking form ---------- */
   var form = document.getElementById('bookForm');

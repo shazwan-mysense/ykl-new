@@ -487,3 +487,308 @@ ul.ticks li::before{content:"";flex:none;width:19px;height:19px;margin-top:2px;b
 @media (max-width:560px){
   .tiles,.tiles--2,.tiles--4{grid-template-columns:1fr}
 }
+
+/* ============================================================================
+   CRAFT LAYER
+   Same palette, same typefaces, same section order. This layer exists to take
+   the generated-template feel out of the build: real type-scale contrast,
+   hairline rules instead of wall-to-wall bordered cards, asymmetry, and motion
+   that is authored per section rather than one fade sprayed over everything.
+   Loaded last, so it overrides the base rules above at equal specificity.
+   ========================================================================== */
+
+/* ---- 1. type scale with actual contrast ---- */
+.h1{font-size:clamp(36px,5vw,62px);letter-spacing:-.035em;line-height:1.03}
+.h2{font-size:clamp(29px,3.9vw,47px);letter-spacing:-.034em;line-height:1.06}
+.h3{font-size:clamp(17px,1.45vw,18.5px);letter-spacing:-.012em}
+.lead{font-size:clamp(16px,1.25vw,17.5px);line-height:1.58;color:var(--ink-70)}
+.acc{color:var(--blue)}
+
+/* ---- 2. section headers: a hairline instead of a decorative accent ---- */
+.sec-head{
+  align-items:flex-end;gap:28px;
+  padding-bottom:20px;border-bottom:1px solid var(--line);
+  margin-bottom:clamp(26px,3vw,40px);
+}
+.sec-head h2,.sec-head .h2{max-width:20ch}
+.sec-head .lead{margin-top:12px}
+.sec-head .arrow-link{padding-bottom:4px}
+.sec-head--center{justify-content:center;text-align:center;border-bottom:0;padding-bottom:0}
+.sec-head--center h2,.sec-head--center .h2{max-width:none}
+.sec-head--center .lead{margin-left:auto;margin-right:auto}
+/* the handwritten accent is now a rarity, not the opener of every section */
+.sec-head .script{display:none}
+.sec-head--keepscript .script{display:block;margin-bottom:2px}
+.sec-count{font-size:clamp(20px,2.4vw,30px);font-weight:500;color:var(--ink-50);letter-spacing:-.02em;white-space:nowrap}
+
+/* ---- 3. scroll-scrubbed statement ---- */
+.say{
+  font-size:clamp(20px,2.5vw,31px);font-weight:600;letter-spacing:-.025em;line-height:1.35;
+  max-width:24ch;color:var(--ink);
+}
+.say--wide{max-width:34ch}
+.say w{color:#C3CBD6;transition:color .34s ease}
+.say w.lit{color:var(--ink)}
+.say w.blue.lit{color:var(--blue)}
+@media (prefers-reduced-motion:reduce){.say w{color:var(--ink)}.say w.blue{color:var(--blue)}}
+
+/* ---- 4. hairline row lists (replaces several boxed grids) ---- */
+.rows{border-top:1px solid var(--line)}
+.rows-i{
+  display:grid;grid-template-columns:minmax(120px,.34fr) 1fr;gap:20px;align-items:baseline;
+  padding:clamp(17px,1.9vw,24px) 0;border-bottom:1px solid var(--line);
+  transition:padding-left .4s var(--e);
+}
+.rows-i:hover{padding-left:8px}
+.rows-n{font-size:clamp(30px,3.6vw,46px);font-weight:700;letter-spacing:-.04em;line-height:1;color:var(--ink)}
+.rows-n sup{font-size:.46em;font-weight:600;vertical-align:super;margin-left:1px;color:var(--blue)}
+.rows-b b{display:block;font-size:15.5px;font-weight:700;letter-spacing:-.01em}
+.rows-b span{display:block;font-size:13.5px;color:var(--ink-50);line-height:1.5;margin-top:4px;max-width:46ch}
+.rows--tight .rows-i{grid-template-columns:22px 1fr;gap:14px;padding:15px 0}
+.rows--tight .rows-mark{width:22px;height:22px;margin-top:1px}
+.rows--tight .rows-mark svg{width:22px;height:22px;stroke:var(--blue);fill:none;stroke-width:1.6}
+
+/* ---- 5. services: a row of work, not six outlined boxes ---- */
+.svc-grid{gap:clamp(14px,1.5vw,22px);border-top:1px solid var(--line);padding-top:clamp(20px,2.2vw,30px)}
+.svc{background:transparent;border:0;border-radius:0;overflow:visible}
+.svc:hover{transform:none;box-shadow:none;border-color:transparent}
+.svc-img{aspect-ratio:5/4;border-radius:10px}
+.svc-b{padding:14px 0 0;gap:5px}
+.svc-b h3{transition:color .25s}
+.svc:hover .svc-b h3{color:var(--blue)}
+.svc-b p{font-size:13px;color:var(--ink-50)}
+.svc .arrow-link{font-size:13.5px;margin-top:2px}
+
+/* ---- 6. devices: full-bleed rule-divided row ---- */
+.dev-row{border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.dev{padding:clamp(22px,2.4vw,32px) 12px}
+.dev-ph{height:clamp(104px,11vw,142px)}
+.dev b{font-size:14.5px;letter-spacing:-.01em}
+.dev-sub{display:block;font-size:12px;color:var(--ink-50);margin-top:3px}
+.dev:hover{transform:none}
+.dev-ph img{transition:transform .6s var(--e)}
+.dev:hover .dev-ph img{transform:translateY(-7px) scale(1.035)}
+.tag{background:transparent;color:var(--blue);font-weight:600;padding:0;
+  top:clamp(10px,1.1vw,16px);transform:translateX(30px);font-size:11.5px;letter-spacing:0}
+
+/* ---- 7. process: one continuous hairline, quieter markers ---- */
+.proc{border-top:1px solid var(--line);padding-top:clamp(26px,3vw,38px)}
+.proc-i{padding:0 clamp(10px,1.4vw,20px);text-align:left}
+.proc-ic{
+  width:40px;height:40px;border-radius:0;background:transparent;margin:0 0 14px;
+  border-bottom:2px solid var(--blue);align-items:flex-end;padding-bottom:9px;
+}
+.proc-i:hover .proc-ic{transform:none;background:transparent}
+.proc-ic svg{width:23px;height:23px;transition:transform .45s var(--e)}
+.proc-i:hover .proc-ic svg{transform:translateY(-3px)}
+.proc-i b{font-size:15.5px;letter-spacing:-.012em}
+.proc-i:not(:last-child)::after{display:none}
+.proc-track{position:relative;height:1px;background:var(--line);margin:0 0 clamp(26px,3vw,38px)}
+.proc-track i{position:absolute;inset:0 auto 0 0;background:var(--blue);width:100%;transform:scaleX(0);transform-origin:left;
+  transition:transform 1.1s var(--e)}
+.proc-track.in i{transform:scaleX(1)}
+
+/* ---- 8. reviews: quotes on rules, not three identical cards ---- */
+.rev-grid{gap:0;border-top:1px solid var(--line)}
+.rev{
+  background:transparent;border:0;border-radius:0;padding:clamp(22px,2.4vw,30px) clamp(18px,2vw,26px);
+  border-bottom:1px solid var(--line);border-right:1px solid var(--line);gap:14px;
+}
+.rev:last-child{border-right:0}
+.rev:hover{transform:none;box-shadow:none}
+.rev p{font-size:15.5px;color:var(--ink);line-height:1.55;letter-spacing:-.012em}
+.rev-who{color:var(--ink-50);font-weight:500;font-size:13px}
+.rev-who i{display:none}
+.rev-who b{color:var(--ink);font-weight:600}
+.stars svg{width:13px;height:13px}
+
+/* ---- 9. FAQ: heading left, questions right ---- */
+.faq-split{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(26px,3.6vw,64px);align-items:start}
+.faq-split .faq{max-width:none;margin:0}
+.faq-aside h2{margin-bottom:14px}
+.faq-aside p{font-size:14.5px;color:var(--ink-70);max-width:34ch;line-height:1.6}
+.faq-aside .arrow-link{margin-top:18px}
+.faq-i:first-child{border-top:1px solid var(--line)}
+.faq-q{padding:20px 0;font-size:16.5px;letter-spacing:-.014em;transition:color .22s}
+.faq-q:hover{color:var(--blue)}
+
+/* ---- 10. locations: hairline cards, photo gets its own ratio ---- */
+.loc{border-radius:0;border:0;border-top:1px solid var(--line);padding-top:16px;background:transparent}
+.loc:hover{transform:none;box-shadow:none}
+.loc-img{aspect-ratio:3/2;border-radius:10px}
+.loc-b{padding:14px 0 0}
+.loc-b h3{font-size:17px;letter-spacing:-.014em}
+
+/* ---- 11. why-choose: rows, and the photo breaks its box ---- */
+.why-art{background:transparent;padding:0;border-radius:0;margin-top:clamp(24px,2.8vw,34px);position:relative}
+.why-art img{width:100%;border-radius:10px}
+.why-script{
+  left:auto;right:-6px;top:auto;bottom:-14px;background:var(--band-2);
+  padding:10px 14px 8px;border-radius:10px;transform:rotate(-2.5deg);
+  font-size:clamp(16px,1.7vw,22px);line-height:1.25;
+}
+
+/* ---- 12. finish ---- */
+.bleed{width:100vw;margin-left:calc(50% - 50vw)}
+.rule{height:1px;background:var(--line);width:100%}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{
+  outline:2px solid var(--blue);outline-offset:3px;border-radius:3px;
+}
+.arrow-link{position:relative}
+.arrow-link::after{
+  content:"";position:absolute;left:0;right:22px;bottom:-3px;height:1px;background:currentColor;
+  transform:scaleX(0);transform-origin:right;transition:transform .42s var(--e);
+}
+.arrow-link:hover::after{transform:scaleX(1);transform-origin:left}
+.prose a:not(.btn):not(.arrow-link){
+  color:var(--blue);background-image:linear-gradient(currentColor,currentColor);
+  background-size:0% 1px;background-repeat:no-repeat;background-position:0 100%;
+  transition:background-size .38s var(--e);
+}
+.prose a:not(.btn):not(.arrow-link):hover{background-size:100% 1px}
+.btn{border-radius:8px;letter-spacing:-.005em}
+.btn:hover{transform:translateY(-1px)}
+.btn svg{transition:transform .35s var(--e)}
+.btn:hover svg{transform:translateX(2px)}
+.cta{border-radius:16px}
+.stat,.stats{border-radius:0}
+
+/* ---- 13. motion: per-word headline reveal ---- */
+.words w{display:inline-block;opacity:0;transform:translateY(.5em) rotate(1.2deg);
+  transition:opacity .62s var(--e),transform .72s var(--e)}
+.words.in w{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.words w{opacity:1!important;transform:none!important}}
+
+/* ---- 14. responsive for the new components ---- */
+@media (max-width:1100px){
+  .faq-split{grid-template-columns:1fr}
+  .rev{border-right:0}
+}
+@media (max-width:980px){
+  .proc-i{text-align:left}
+}
+@media (max-width:760px){
+  .rows-i{grid-template-columns:1fr;gap:6px}
+  .rows-n{font-size:34px}
+  .sec-head{flex-direction:column;align-items:flex-start;gap:14px}
+  .sec-head .arrow-link{padding-bottom:0}
+  .svc-b p{font-size:13.5px}
+}
+
+/* ---- 15. craft-layer corrections ---- */
+/* the "Popular" flag belongs at the edge of its own tile, not floating over the row */
+.tag{left:auto;right:clamp(10px,1.2vw,18px);transform:none}
+/* one deliberately filled cell in the locations grid, so the row is not four identical columns */
+.loc--cta{border-top:0;background:var(--band);border-radius:12px}
+.loc--cta .loc-b{padding:clamp(18px,2vw,24px)}
+.loc--cta h3{margin-bottom:8px}
+.loc--cta address{margin-bottom:16px;display:block}
+/* the stats rows carry the section on their own, so give them air above */
+.rows#stats{margin-top:4px}
+.rows-n.n{font-variant-numeric:tabular-nums}
+
+/* ---- 16. kill the synthetic glows; let the photography carry the dark sections ---- */
+.hero::after{background:linear-gradient(180deg,rgba(255,255,255,.04),transparent 30%,rgba(0,0,0,.35))}
+.phero::after{background:none}
+.cta::before{background:none}
+.cta{border:1px solid rgba(255,255,255,.09)}
+.cta h2{font-size:clamp(26px,3.2vw,40px);max-width:16ch}
+
+/* ---- 17. trust bar: left-aligned, icon sized down, type doing the work ---- */
+.trust-i{text-align:left;padding:clamp(22px,2.4vw,30px) clamp(14px,1.6vw,22px) clamp(22px,2.4vw,30px) 0}
+.trust-i:first-child{padding-left:0}
+.trust-i+.trust-i{padding-left:clamp(14px,1.6vw,22px)}
+.trust-i svg{width:19px;height:19px;margin:0 0 12px;stroke-width:1.8}
+.trust-i b{font-size:14px;letter-spacing:-.012em;line-height:1.3}
+.trust-i small{font-size:12.5px;margin-top:4px;line-height:1.4}
+
+/* ---- 18. tiles: hairline cards, the image leads ---- */
+.tile{border-radius:12px;border-color:#EAEEF4}
+.tile:hover{transform:translateY(-4px);box-shadow:0 12px 26px rgba(16,24,40,.08);border-color:#DCE4EF}
+.tile-b h3{letter-spacing:-.014em}
+
+/* ---- 19. team: portraits, not cards ---- */
+.team-card{border:0;background:transparent;border-radius:0}
+.team-card:hover{transform:none;box-shadow:none}
+.team-card .ph{border-radius:10px}
+.team-card b{padding:12px 0 2px;font-size:15px;letter-spacing:-.012em}
+.team-card small{padding:0}
+
+/* ---- 20. blog cards keep their box but lose the generic lift ---- */
+.post{border-radius:12px;border-color:#EAEEF4}
+.post:hover{transform:translateY(-4px);box-shadow:0 12px 26px rgba(16,24,40,.08)}
+.post-b h3{letter-spacing:-.018em}
+
+@media (max-width:560px){
+  .trust-i{padding-left:0!important;padding-right:10px}
+  .trust-i+.trust-i{padding-left:14px!important}
+}
+
+/* ---- 21. let the hero photograph break the container ---- */
+.hero .wrap{grid-template-columns:1.02fr .98fr}
+.hero-art{margin-right:calc(-1 * clamp(20px,7vw,150px))}
+@media (max-width:980px){.hero-art{margin-right:0}}
+
+/* ---- 22. process: markers sitting on a line that draws itself ---- */
+.proc-track{margin-bottom:0}
+.proc{border-top:0;padding-top:0}
+.proc-i{position:relative;padding:26px clamp(10px,1.4vw,22px) 0 0}
+.proc-i::before{
+  content:"";position:absolute;top:-3.5px;left:0;width:8px;height:8px;border-radius:50%;
+  background:var(--blue);transform:scale(0);transition:transform .5s var(--e);
+}
+.proc-track.in ~ .proc .proc-i::before{transform:scale(1)}
+.proc-track.in ~ .proc .proc-i:nth-child(2)::before{transition-delay:.14s}
+.proc-track.in ~ .proc .proc-i:nth-child(3)::before{transition-delay:.28s}
+.proc-track.in ~ .proc .proc-i:nth-child(4)::before{transition-delay:.42s}
+.proc-track.in ~ .proc .proc-i:nth-child(5)::before{transition-delay:.56s}
+.proc-ic{
+  width:auto;height:auto;border:0;background:transparent;padding:0;margin:0 0 12px;
+  display:block;
+}
+.proc-ic svg{width:21px;height:21px}
+.proc-i b{font-size:16px;font-weight:700;letter-spacing:-.016em}
+.proc-i p{font-size:13px;margin-top:6px;max-width:26ch}
+@media (prefers-reduced-motion:reduce){.proc-i::before{transform:scale(1)!important}}
+
+/* ---- 23. hovering one item quiets the rest of the row ---- */
+@media (hover:hover){
+  .svc-grid .svc,.dev-grid .dev,.why-list .rows-i,.rev-grid .rev{transition:opacity .35s var(--e),transform .35s var(--e),padding-left .4s var(--e)}
+  .svc-grid:hover .svc,.dev-grid:hover .dev,.rev-grid:hover .rev{opacity:.42}
+  .svc-grid:hover .svc:hover,.dev-grid:hover .dev:hover,.rev-grid:hover .rev:hover{opacity:1}
+}
+
+/* ---- 24. vertical rhythm: not every section is the same height ---- */
+.sec--tight{padding-block:clamp(40px,4.4vw,60px)}
+.sec--airy{padding-block:clamp(62px,7.6vw,104px)}
+
+/* ---- 25. reviews: the quote is the point ---- */
+.rev p{font-size:clamp(15px,1.25vw,16.5px);line-height:1.5}
+.stars{opacity:.9}
+
+/* ---- 26. the craft layer on small screens ---- */
+@media (max-width:760px){
+  /* one continuous rule across five columns makes no sense once they wrap */
+  .proc-track{display:none}
+  .proc{gap:0}
+  .proc-i{border-top:1px solid var(--line);padding:20px 0 20px 0}
+  .proc-i::before{top:-4.5px}
+  .proc-i p{max-width:none}
+  .trust-i svg{width:17px;height:17px;margin-bottom:9px}
+  .faq-aside p{max-width:none}
+  .faq-aside .arrow-link{margin-bottom:24px}
+  .why-script{position:static;display:inline-block;margin-top:12px;transform:rotate(-2deg)}
+  .hero-art{margin-right:0}
+}
+@media (max-width:560px){
+  .rows-i:hover{padding-left:0}
+  .sec-head{padding-bottom:16px;margin-bottom:22px}
+}
+
+/* ---- 27. the craft layer is loaded last, so any rule it restates for desktop
+   must restate the small-screen override too, or it wins there as well.
+   (.hero .wrap is set to 1.02fr/.98fr above; without this the hero never stacks.) ---- */
+@media (max-width:980px){
+  .hero .wrap{grid-template-columns:1fr}
+  .hero-art{max-width:520px;margin-right:0}
+}

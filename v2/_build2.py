@@ -50,9 +50,15 @@ def detail(fname, crumb, h1, lead, art, script, symptoms, prose, title, desc, fa
         items = ''.join(
             '\n      <div class="faq-i"><button class="faq-q">%s%s</button><div class="faq-a"><p>%s</p></div></div>' % (q, PLUS, a)
             for q, a in faq)
-        b += '\n<section class="sec">\n  <div class="wrap">\n    ' \
-             + sec_head('good to know', 'Questions we get asked', center=True) \
-             + '\n    <div class="faq rv">' + items + '\n    </div>\n  </div>\n</section>\n'
+        b += ('\n<section class="sec">\n  <div class="wrap">\n'
+              '    <div class="faq-split">\n'
+              '      <div class="faq-aside">\n'
+              '        <h2 class="h2 mask"><span>Questions we get asked</span></h2>\n'
+              '        <p class="rv" style="--d:.1s">The things people ask about this repair at the counter. '
+              'Anything else, message the workshop and we will answer today.</p>\n'
+              '        <a class="arrow-link rv" style="--d:.16s" href="%s" target="_blank" rel="noopener">Ask us directly %s</a>\n'
+              '      </div>\n'
+              '      <div class="faq rv">' % (WA, ARROW)) + items + '\n      </div>\n    </div>\n  </div>\n</section>\n'
     b += PROCESS
     write(fname, title, desc, b)
 
