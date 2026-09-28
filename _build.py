@@ -282,11 +282,11 @@ body = phero('About Us', 'Mac specialists, not a general phone shop',
 body += f'''
 <section class="sec sec--band">
   <div class="wrap">
-    <div class="rows reveal-group" id="stats">
-      <div class="rows-i rv"><span class="rows-n n" data-count="1190" data-suffix="+">0</span><div class="rows-b"><b>Google reviews</b><span>Rated Excellent by customers across all three branches.</span></div></div>
-      <div class="rows-i rv" style="--d:.06s"><span class="rows-n n" data-count="1000000" data-suffix="+">0</span><div class="rows-b"><b>Views on TikTok</b><span>People watch us take Macs apart at <a href="https://www.tiktok.com/@yklmacfix" target="_blank" rel="noopener">@yklmacfix</a>.</span></div></div>
-      <div class="rows-i rv" style="--d:.12s"><span class="rows-n n" data-count="3" data-suffix="">0</span><div class="rows-b"><b>Branches in Malaysia</b><span>Petaling Jaya and two in Kuantan, all with the same bench standard.</span></div></div>
-      <div class="rows-i rv" style="--d:.18s"><span class="rows-n n" data-count="5" data-suffix="">0</span><div class="rows-b"><b>Years of warranty, up to</b><span>On selected repairs and upgrades, stated on your invoice.</span></div></div>
+    <div class="statrow reveal-group" id="stats">
+      <div class="statrow-i rv"><span class="statrow-n n" data-count="1190" data-suffix="+">0</span><b>Google reviews</b><small>Rated Excellent across all three branches</small></div>
+      <div class="statrow-i rv"><span class="statrow-n n" data-count="1000" data-suffix="+">0</span><b>Apple devices repaired</b><small>And counting, at our own bench</small></div>
+      <div class="statrow-i rv"><span class="statrow-n n" data-count="3" data-suffix="">0</span><b>Branches in Malaysia</b><small>Petaling Jaya and two in Kuantan</small></div>
+      <div class="statrow-i rv"><span class="statrow-n n" data-count="5" data-suffix="">0</span><b>Years of warranty, up to</b><small>On selected repairs and upgrades</small></div>
     </div>
   </div>
 </section>

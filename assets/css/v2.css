@@ -1207,3 +1207,166 @@ body{font-size:17px}
   .statrow{grid-template-columns:1fr}
   .statrow-i+.statrow-i::before{left:0;right:0;top:0;bottom:auto;width:auto;height:1px}
 }
+
+/* ============================================================================
+   CLIENT ROUND 3 (28 Sep 2026)
+   "as the screen gets bigger, use more on the left and right" + everything
+   two sizes up, without the trust-bar and process labels breaking onto a
+   ragged second line.
+   ========================================================================== */
+
+/* ---- 61. the container opens up on large monitors instead of sitting in a
+   fixed 1240px column with dead space either side ---- */
+@media (min-width:1360px){ :root{--maxw:1330px;--maxw-wide:1420px} }
+@media (min-width:1560px){ :root{--maxw:1450px;--maxw-wide:1540px} }
+@media (min-width:1800px){ :root{--maxw:1580px;--maxw-wide:1680px} }
+@media (min-width:2100px){ :root{--maxw:1680px;--maxw-wide:1780px} }
+/* the horizontal strips get the wider measure, the reading columns do not */
+.trust .wrap,.proc-track,.proc,.statrow,.socialrow{max-width:var(--maxw-wide,1400px);margin-inline:auto}
+.trust .wrap{padding-inline:24px}
+
+/* ---- 62. trust bar: labels stay on one line and the row stays aligned.
+   The type scales with the viewport so it is never wider than its cell. ---- */
+.trust-i b{font-size:clamp(14.5px,1.06vw,17.5px);line-height:1.25}
+.trust-i small{font-size:clamp(12.5px,.94vw,15.5px);line-height:1.35;margin-top:6px}
+.trust-i svg{width:clamp(22px,1.7vw,29px);height:clamp(22px,1.7vw,29px);margin-bottom:15px}
+.trust-i{padding-block:clamp(26px,3vw,40px)}
+.trust .wrap{grid-template-columns:repeat(6,1fr)}
+.trust-i::before{display:none}
+.trust-i+.trust-i::before{display:block}
+@media (max-width:1099px){
+  .trust .wrap{grid-template-columns:repeat(3,1fr)}
+  .trust-i:nth-child(3n+1)::before{display:none}
+}
+@media (max-width:640px){
+  .trust .wrap{grid-template-columns:repeat(2,1fr)}
+  .trust-i:nth-child(3n+1)::before{display:block}
+  .trust-i:nth-child(odd)::before{display:none}
+}
+
+/* ---- 63. repair process: same treatment, wider and a size up ---- */
+.proc-i b{font-size:clamp(16px,1.2vw,20px);line-height:1.3}
+.proc-i p{font-size:clamp(14.5px,1.02vw,17px);line-height:1.55;max-width:30ch}
+.proc-ic svg{width:clamp(23px,1.75vw,29px);height:clamp(23px,1.75vw,29px)}
+.proc-i{padding-right:clamp(12px,1.6vw,28px)}
+
+/* ---- 64. two sizes up, everywhere ---- */
+body{font-size:19px}
+.lead{font-size:clamp(18px,1.5vw,22px);line-height:1.52}
+.h3,h3{font-size:19px}
+.nav>li>a{font-size:16.5px}
+.drop a{font-size:16px}
+.btn{font-size:17px;padding:15px 26px}
+.ubar{font-size:14.5px}
+.arrow-link{font-size:16.5px}
+.eyebrow{font-size:14.5px}
+.chip{font-size:14px}
+.chip svg{width:16px;height:16px}
+
+.svc-b h3{font-size:21px}
+.svc-b p{font-size:17px;line-height:1.52;max-width:36ch}
+.svc .arrow-link{font-size:16px}
+.tile-b h3{font-size:21px}
+.tile-b p{font-size:17px;line-height:1.52}
+.dev b{font-size:18px}
+.dev-sub{font-size:15px}
+.rows-b b{font-size:19px}
+.rows-b span{font-size:17px;line-height:1.52;max-width:38ch}
+.rows--tight .rows-mark svg{width:25px;height:25px}
+
+.statrow-n{font-size:clamp(34px,4.1vw,54px)}
+.statrow-i b{font-size:18px}
+.statrow-i small{font-size:16px;line-height:1.4}
+.social-b b{font-size:18px}
+.social-b small{font-size:16px}
+.social-i svg{width:29px;height:29px}
+
+.loc-b h3{font-size:21px}
+.loc-b address,.loc-row,.loc-note{font-size:17px}
+.rev p{font-size:clamp(17px,1.4vw,19.5px)}
+.rev--lead p{font-size:clamp(21px,2.1vw,29px)}
+.rev-who{font-size:16px}
+.faq-q{font-size:20px;padding:24px 0}
+.faq-a p{font-size:18px;line-height:1.6;max-width:44ch}
+.faq-aside p{font-size:18px}
+.prose p,ul.ticks li{font-size:19px;line-height:1.6}
+.prose p,ul.ticks{max-width:52ch}
+.prose h2{font-size:clamp(26px,2.7vw,35px)}
+.prose h3{font-size:21px}
+.abox h4{font-size:19px}
+.abox p,.abox ul{font-size:17px}
+.post-b h3{font-size:22px}
+.post-b p{font-size:17px}
+.post-b .meta{font-size:14px}
+.team-card b{font-size:18px}
+.team-card small{font-size:15px}
+.sym span{font-size:17px;padding:10px 19px}
+.ft{font-size:17px}
+.ft h5{font-size:15.5px}
+.ft-base{font-size:15px}
+.cta p{font-size:18px}
+.crumb{font-size:14.5px}
+.f label{font-size:15px}
+.f input,.f select,.f textarea{font-size:17px}
+.say{font-size:clamp(21px,2.6vw,33px)}
+
+/* headings keep their lead over the larger body copy */
+.h1{font-size:clamp(38px,5.2vw,66px)}
+.h2{font-size:clamp(30px,4vw,49px)}
+.h2--sub{font-size:clamp(24px,2.6vw,34px)}
+.phero h1{font-size:clamp(35px,4.8vw,59px)}
+.hero.hero--air h1{font-size:clamp(39px,5.5vw,74px)}
+
+/* the nav has more to carry now, so give it room before it collapses */
+@media (max-width:1180px) and (min-width:981px){
+  .nav{gap:20px}
+  .nav>li>a{font-size:15.5px}
+  .hdr .btn{font-size:15.5px;padding:12px 18px}
+}
+@media (max-width:760px){
+  body{font-size:18px}
+  .prose p,ul.ticks li{font-size:18px}
+  .faq-q{font-size:18px}
+  .faq-a p{font-size:17px}
+}
+
+/* ---- 65. two overflow defects introduced by block 61/62, both measured ----
+
+   1100px: `repeat(6,1fr)` is really `minmax(auto,1fr)`, and `auto` floors each
+   track at min-content. Adding white-space:nowrap to the labels raised that
+   floor above the available track width, so the grid pushed past the viewport.
+   minmax(0,1fr) lets the tracks shrink, and nowrap now only applies from the
+   width where the labels genuinely fit.
+
+   1360px: .why-art breaks out of the gutter by up to 3.4vw, but block 61 widened
+   the container and left only the 24px page padding to break into. The breakout
+   is now capped at that gutter instead of a viewport percentage. */
+.trust .wrap{grid-template-columns:repeat(6,minmax(0,1fr))}
+@media (max-width:1199px){
+  .trust .wrap{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .trust-i::before{display:none}
+  .trust-i:not(:nth-child(3n+1))::before{display:block}
+}
+@media (min-width:1200px){
+  .trust-i b,.trust-i small{white-space:nowrap}
+}
+@media (max-width:1099px){
+  .trust .wrap{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media (max-width:640px){
+  .trust .wrap{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .trust-i b,.trust-i small{white-space:normal}
+  .trust-i::before{display:none}
+  .trust-i:nth-child(even)::before{display:block}
+}
+.why-art{margin-right:calc(-1 * clamp(0px,3.4vw,24px))}
+@media (max-width:1100px){.why-art{margin-right:0}}
+
+/* ---- 66. block 58's `.why-split .why-art` outranks the `.why-art` cap in
+   block 65, so the 3.4vw breakout survived. Same specificity, applied last.
+   The arithmetic confirms it was the only offender: at 1360px the container is
+   1330 wide, leaving 15px of gutter plus 24px of padding = 39px to break into,
+   while 3.4vw asked for 46px — exactly the 7px that overflowed. At 1200px it
+   asked for 41px against 24px available, exactly the 17px seen there. */
+.why-split .why-art{margin-right:calc(-1 * clamp(0px,3.4vw,24px))}
+@media (max-width:1100px){.why-split .why-art{margin-right:0}}
