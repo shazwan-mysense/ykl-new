@@ -53,6 +53,10 @@ ART_ALT = {
  'ykl-work-4.jpg':'YKL technician removing a MacBook battery',
  'ykl-work-3.jpg':'YKL technician inspecting a logic board under a microscope',
  'ykl-work-2.jpg':'YKL technician cleaning a liquid-damaged Mac board',
+ 'ykl-work-5.jpg':'YKL technician servicing a MacBook keyboard',
+ 'r-ram-chip.jpg':'Memory module ready for a Mac upgrade',
+ 'r-iphone-mat.jpg':'Charging port repair on the YKL bench',
+ 'ykl-work-7.jpg':'YKL technician handling an iPad display',
 }
 
 ARROW = '<svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>'
@@ -150,15 +154,15 @@ SERVICES = [
  ('ykl-work-2.jpg','Technician cleaning a Mac board at the bench','Water damage recovery',
   'Ultrasonic cleaning, corrosion treatment and component replacement after a spill. Bring it in fast.','mac-water-damage-repair.html'),
  ('ykl-work-5.jpg','Technician servicing a MacBook keyboard','Keyboard &amp; trackpad',
-  'Sticky or repeating keys, dead rows, and trackpads that will not click or register gestures.',None),
+  'Sticky or repeating keys, dead rows, and trackpads that will not click or register gestures.','mac-keyboard-trackpad-repair.html'),
  ('r-ram-chip.jpg','Memory module ready for a Mac upgrade','SSD &amp; RAM upgrade',
-  'More storage and memory for older Intel Macs, with your data migrated across before you collect.',None),
+  'More storage and memory for older Intel Macs, with your data migrated across before you collect.','mac-ssd-ram-upgrade.html'),
  ('ykl-work-6.jpg','Technician running diagnostics on a MacBook','Speaker &amp; audio repair',
-  'Crackling, muted or one-sided speakers, failed microphones and headphone jack faults.',None),
+  'Crackling, muted or one-sided speakers, failed microphones and headphone jack faults.','mac-speaker-audio-repair.html'),
  ('r-iphone-mat.jpg','Charging port repair on the bench','Charging &amp; port repair',
-  'MagSafe and USB-C ports that will not charge, loose connectors and charging IC faults.',None),
+  'MagSafe and USB-C ports that will not charge, loose connectors and charging IC faults.','mac-charging-port-repair.html'),
  ('ykl-work-7.jpg','Technician handling a tablet display','iPad &amp; iPhone repair',
-  'Screens, batteries, charging ports, speakers, logic boards and water damage on iPad and iPhone.',None),
+  'Screens, batteries, charging ports, speakers, logic boards and water damage on iPad and iPhone.','ipad-iphone-repair.html'),
 ]
 
 body = phero('Mac Repair', 'Every Apple repair, under one roof',

@@ -1032,3 +1032,178 @@ ul.ticks li{font-size:15.5px;line-height:1.55}
 
 /* ---- 55. the base focus rule still set an explicit radius; the later one
    corrects it, but leaving both means editing the wrong one does nothing. ---- */
+
+/* ============================================================================
+   CLIENT ROUND 2 (28 Sep 2026)
+   ========================================================================== */
+
+/* ---- 56. hero restored to the v1 gradient version, at the client's request.
+   Expressed in the current token set; the two light washes and the headline
+   gradient's pale end are tints of --blue, declared as tokens below. ---- */
+:root{
+  --wash-1:#D8E7F6;   /* v1 hero gradient top    */
+  --wash-2:#E7F1FA;   /* v1 hero gradient middle */
+  --blue-pale:#7FB5FF;/* pale end of the headline gradient */
+}
+.hero.hero--air{
+  background:linear-gradient(180deg,var(--wash-1) 0%,var(--wash-2) 58%,#fff 100%);
+  color:var(--ink);text-align:center;overflow:hidden;
+  padding:clamp(52px,6.4vw,84px) 0 0;
+}
+.hero.hero--air::after{display:none}
+.hero.hero--air .wrap{
+  display:block;grid-template-columns:none;min-height:0;padding-block:0;text-align:center;
+}
+.hero.hero--air h1{
+  color:var(--ink);max-width:16ch;margin:20px auto 0;
+  font-size:clamp(38px,5.4vw,72px);line-height:1.04;letter-spacing:-.035em;
+}
+.hero.hero--air .lead{color:var(--ink-70);max-width:54ch;margin:22px auto 0}
+.hero.hero--air .hero-cta{justify-content:center;margin-top:34px}
+.hero.hero--air .btn--line{background:#fff}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:13px;font-weight:600;letter-spacing:.075em;text-transform:uppercase;color:var(--blue);
+}
+.eyebrow svg{width:15px;height:15px;stroke:var(--blue);fill:none;stroke-width:1.7;flex:none}
+.chip-row{display:flex;flex-wrap:wrap;gap:10px 22px}
+.hero-chips{justify-content:center;margin-top:32px}
+.chip{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:12.5px;letter-spacing:.055em;text-transform:uppercase;
+  color:var(--ink-50);white-space:nowrap;font-weight:500;
+}
+.chip svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.7;flex:none}
+.hero-visual{margin-top:clamp(28px,4.2vw,54px);padding-bottom:clamp(18px,2.8vw,38px)}
+.hero-visual img{
+  width:min(880px,90%);margin:0 auto;display:block;height:auto;
+  filter:drop-shadow(0 34px 60px rgba(25,55,105,.2));
+}
+/* the pale-blue wash is light, so the sticky header needs its own edge again */
+.hero.hero--air + .trust{border-top:0}
+
+/* animated gradient headline word.
+   NOTE: never animate background-position here — Chromium stops painting clipped text. */
+.grad-text{
+  background-image:linear-gradient(95deg,var(--blue-dark) 5%,var(--blue) 45%,var(--blue-pale) 95%);
+  -webkit-background-clip:text;background-clip:text;
+  color:transparent;-webkit-text-fill-color:transparent;
+}
+.rotator .word{display:inline-block}
+.word-out{animation:wordOut .38s var(--e) forwards}
+.word-in{animation:wordIn .5s var(--e)}
+@keyframes wordOut{to{opacity:0;transform:translateY(-18px)}}
+@keyframes wordIn{from{opacity:0;transform:translateY(20px)}}
+.bob{animation:bob 7s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-13px)}}
+@media (prefers-reduced-motion:reduce){
+  .bob{animation:none!important}
+  .word-out,.word-in{animation:none!important}
+}
+@media (max-width:760px){
+  .hero.hero--air h1{font-size:clamp(32px,8.4vw,44px)}
+  .hero-chips{gap:8px 16px}
+  .chip{font-size:11.5px}
+}
+
+/* ---- 57. stats as a horizontal row, with the social accounts under it ---- */
+.statrow{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:0;
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+}
+.statrow-i{padding:clamp(26px,3vw,38px) clamp(16px,2vw,28px);position:relative}
+.statrow-i+.statrow-i::before{content:"";position:absolute;left:0;top:clamp(26px,3vw,38px);bottom:clamp(26px,3vw,38px);width:1px;background:var(--line)}
+.statrow-n{
+  display:block;font-size:clamp(32px,3.9vw,50px);font-weight:700;letter-spacing:-.04em;
+  line-height:1;font-variant-numeric:tabular-nums;
+}
+.statrow-i b{display:block;font-size:16px;font-weight:700;letter-spacing:-.012em;margin-top:12px;line-height:1.3}
+.statrow-i small{display:block;font-size:14px;color:var(--ink-50);margin-top:4px}
+
+.socialrow{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-bottom:1px solid var(--line)}
+.social-i{
+  display:flex;align-items:center;gap:14px;padding:22px clamp(16px,2vw,28px);position:relative;
+  transition:background .25s var(--e);
+}
+.social-i+.social-i::before{content:"";position:absolute;left:0;top:18px;bottom:18px;width:1px;background:var(--line)}
+.social-i:hover{background:var(--blue-soft)}
+.social-i svg{width:26px;height:26px;fill:var(--ink);flex:none;transition:fill .25s}
+.social-i:hover svg{fill:var(--blue)}
+.social-b b{display:block;font-size:16px;font-weight:700;letter-spacing:-.012em}
+.social-b small{display:block;font-size:14px;color:var(--ink-50);margin-top:2px}
+
+/* ---- 58. why-choose now owns its section: rows beside the bench photo ---- */
+.why-split{display:grid;grid-template-columns:1.12fr .88fr;gap:clamp(28px,3.8vw,56px);align-items:start}
+.why-split .why-art{margin-top:0;margin-right:calc(-1 * clamp(14px,3.4vw,56px))}
+
+/* ---- 59. client round 2: everything reads a size up ---- */
+body{font-size:17px}
+.lead{font-size:clamp(17px,1.35vw,19px);line-height:1.55}
+.nav>li>a{font-size:15.5px}
+.drop a{font-size:15px}
+.btn{font-size:16px;padding:14px 24px}
+.ubar{font-size:13.5px}
+.arrow-link{font-size:15.5px}
+
+.trust .wrap{grid-template-columns:repeat(6,1fr)}
+.trust-i{padding:clamp(28px,3.2vw,40px) clamp(16px,1.8vw,26px) clamp(28px,3.2vw,40px) 0}
+.trust-i svg{width:26px;height:26px;margin-bottom:14px;stroke-width:1.7}
+.trust-i b{font-size:16.5px;line-height:1.3}
+.trust-i small{font-size:14px;margin-top:5px}
+
+.svc-b h3{font-size:19px}
+.svc-b p{font-size:15px;line-height:1.55;max-width:38ch}
+.tile-b h3{font-size:19px}
+.tile-b p{font-size:15px;line-height:1.55}
+.dev b{font-size:16px}
+.dev-sub{font-size:13.5px}
+.rows-b b{font-size:17px}
+.rows-b span{font-size:15px;line-height:1.55;max-width:40ch}
+.proc-i b{font-size:18px}
+.proc-i p{font-size:15px;line-height:1.55;max-width:28ch}
+.proc-ic svg{width:25px;height:25px}
+.loc-b h3{font-size:19px}
+.loc-b address,.loc-row{font-size:15px}
+.rev p{font-size:clamp(16px,1.3vw,17.5px)}
+.rev--lead p{font-size:clamp(20px,2vw,27px)}
+.rev-who{font-size:14.5px}
+.faq-q{font-size:18px;padding:22px 0}
+.faq-a p{font-size:16px;line-height:1.62;max-width:46ch}
+.faq-aside p{font-size:16px}
+.prose p,ul.ticks li{font-size:17px;line-height:1.62}
+.prose h2{font-size:clamp(24px,2.5vw,32px)}
+.prose h3{font-size:19px}
+.abox h4{font-size:17.5px}
+.abox p,.abox ul{font-size:15px}
+.post-b h3{font-size:20px}
+.post-b p{font-size:15px}
+.post-b .meta{font-size:13px}
+.team-card b{font-size:16.5px}
+.team-card small{font-size:13.5px}
+.sym span{font-size:15px;padding:9px 17px}
+.ft{font-size:15.5px}
+.ft-base{font-size:14px}
+.cta p{font-size:16.5px}
+.f label{font-size:14px}
+.f input,.f select,.f textarea{font-size:16px}
+
+/* ---- 60. footer gains the areas column ---- */
+.ft-top{grid-template-columns:1.5fr 1fr 1fr 1fr 1.25fr}
+
+@media (max-width:1100px){
+  .why-split{grid-template-columns:1fr}
+  .why-split .why-art{margin-right:0}
+  .statrow{grid-template-columns:repeat(2,1fr)}
+  .statrow-i:nth-child(3)::before{display:none}
+  .ft-top{grid-template-columns:1fr 1fr}
+}
+@media (max-width:760px){
+  body{font-size:16.5px}
+  .socialrow{grid-template-columns:1fr}
+  .social-i+.social-i::before{left:0;right:0;top:0;bottom:auto;width:auto;height:1px}
+  .ft-top{grid-template-columns:1fr}
+}
+@media (max-width:560px){
+  .statrow{grid-template-columns:1fr}
+  .statrow-i+.statrow-i::before{left:0;right:0;top:0;bottom:auto;width:auto;height:1px}
+}

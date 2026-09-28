@@ -231,6 +231,26 @@
 
   /* ---------- process: the hairline draws once, in view ---------- */
 
+
+  /* ---------- rotating headline word (restored with the v1 hero) ---------- */
+  Array.prototype.forEach.call(document.querySelectorAll('.word[data-rotate]'), function (el) {
+    var phrases;
+    try { phrases = JSON.parse(el.getAttribute('data-rotate')); } catch (e) { return; }
+    if (!phrases || phrases.length < 2 || !motionOK) return;
+    var i = 0;
+    setInterval(function () {
+      if (document.hidden) return;
+      el.classList.add('word-out');
+      setTimeout(function () {
+        i = (i + 1) % phrases.length;
+        el.textContent = phrases[i];
+        el.classList.remove('word-out');
+        el.classList.add('word-in');
+        setTimeout(function () { el.classList.remove('word-in'); }, 520);
+      }, 380);
+    }, 3000);
+  });
+
   /* ---------- mock booking form ---------- */
   var form = document.getElementById('bookForm');
   if (form) {

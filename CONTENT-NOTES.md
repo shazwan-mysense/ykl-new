@@ -94,3 +94,44 @@ which were replaced with YKL's verified data:
 - Service-page copy asserts specific workshop capabilities (ultrasonic cleaning, stereo-microscope bench,
   panels kept in stock, BGA reballing). Board-level repair and reball are confirmed; the rest were written to
   describe a normal Apple repair workflow and should be confirmed with the client before launch.
+
+---
+
+## Client round 2 — 28 Sep 2026
+
+Amendments applied from the client's annotated screenshots.
+
+| Asked for | Done |
+|---|---|
+| Hero back to the previous version | v1 gradient hero restored: rotating headline word, MacBook Air render, the three chips |
+| Trust bar bigger, it is their USP | icons, labels and captions all sized up |
+| All wording bigger | global type bump: body 16→17px, card copy 13.5→15px, headings and leads up with it |
+| Locations section → focus on Why choose, keep the shirt photo | the three branch cards are gone from the homepage; the section is now Why choose YKL Mac Fix with the bench photo |
+| Repair process bigger | step titles 16→18px, copy 13→15px, icons up |
+| Stats in a row, drop TikTok views, add Apple devices repaired 1k++ | four-across row: 1,190+ reviews · 1,000+ Apple devices repaired · 3 branches · 5 years warranty |
+| A clickable row of social follower counts | row added under the stats, linking Instagram, TikTok and YouTube |
+| About Us after Home in the nav | done |
+| Locations out of the nav, footer only | dropped from nav and mobile drawer; footer now has an "Areas we cover" column beside "Branches" |
+| Generic pages for the services with no Learn more | five new pages: keyboard & trackpad, SSD & RAM, speaker & audio, charging & ports, iPad & iPhone |
+| Dedicated pages for six locations, with the keyword list | six area pages written, keywords woven into copy, headings and FAQs |
+
+### NEEDS AN ANSWER BEFORE THESE GO LIVE
+
+1. **Social follower counts.** Only TikTok's is publicly readable and it is in the page as a fact:
+   **12.1K followers** on `@yklmacfix` (read from their public profile, 28 Sep 2026). Instagram is behind
+   a login wall and the YouTube channel ("YKL Gadget Repair Specialist") does not publish its subscriber
+   count, so those two currently show the handle instead of a number. **Send me the Instagram follower
+   count and the YouTube subscriber count and I will put them in.** They are not guessed and must not be.
+2. **Facebook / Meta.** The client asked for Meta in the social row, but YKL's own live site
+   (yklmacfix.com) links only to Instagram, TikTok and YouTube — the only Facebook reference on it is a
+   Meta Pixel, which is tracking, not a page. **Send me the Facebook page URL** and I will add it as a
+   fourth cell.
+3. **"1,000+ Apple devices repaired"** comes from the client's own note ("apple devices repaired 1k++").
+   It is their claim about their own business, so it is in, but it is not independently verified.
+4. **The six area pages are written as SERVICE AREAS, not branches.** Verified facts give YKL three
+   branches: Petaling Jaya (HQ) and two in Kuantan. Bangsar South, Mont Kiara, Kuala Lumpur, Publika and
+   Ampang have no shopfront, so each page says so plainly and routes the reader to the PJ workshop or the
+   free Klang Valley pickup. Only the Petaling Jaya page describes a walk-in branch, because that one is
+   real. **If the client actually has premises in any of the other five, tell me and I will rewrite that
+   page.** Publika in particular was a fabricated branch in the original AI mockup and was removed then;
+   it has not been reinstated as one.
