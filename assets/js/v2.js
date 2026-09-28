@@ -232,6 +232,41 @@
   /* ---------- process: the hairline draws once, in view ---------- */
 
 
+
+  /* ---------- full-width header panel ---------- */
+  var mega = document.getElementById('mega');
+  var navEl = document.querySelector('.nav');
+  if (mega && navEl && hdr) {
+    var megaTimer = null;
+    function megaOpen() {
+      if (window.innerWidth <= 980) return;
+      clearTimeout(megaTimer);
+      mega.classList.add('open');
+    }
+    function megaClose(delay) {
+      clearTimeout(megaTimer);
+      megaTimer = setTimeout(function () { mega.classList.remove('open'); }, delay || 0);
+    }
+    navEl.addEventListener('mouseenter', megaOpen);
+    mega.addEventListener('mouseenter', function () { clearTimeout(megaTimer); });
+    hdr.addEventListener('mouseleave', function () { megaClose(160); });
+    mega.addEventListener('mouseleave', function () { megaClose(160); });
+    navEl.addEventListener('focusin', megaOpen);
+    mega.addEventListener('focusin', megaOpen);
+    document.addEventListener('focusin', function (e) {
+      if (!mega.contains(e.target) && !navEl.contains(e.target)) megaClose(0);
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') megaClose(0);
+    });
+    mega.addEventListener('click', function (e) {
+      if (e.target.tagName === 'A') megaClose(0);
+    });
+    window.addEventListener('resize', function () {
+      if (window.innerWidth <= 980) megaClose(0);
+    });
+  }
+
   /* ---------- rotating headline word (restored with the v1 hero) ---------- */
   Array.prototype.forEach.call(document.querySelectorAll('.word[data-rotate]'), function (el) {
     var phrases;

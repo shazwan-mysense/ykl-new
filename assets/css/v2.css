@@ -1370,3 +1370,86 @@ body{font-size:19px}
    asked for 41px against 24px available, exactly the 17px seen there. */
 .why-split .why-art{margin-right:calc(-1 * clamp(0px,3.4vw,24px))}
 @media (max-width:1100px){.why-split .why-art{margin-right:0}}
+
+/* ---- 67. team grid: the trailing row centres instead of hanging left ---- */
+.team-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(16px,1.8vw,24px)}
+.team-card{flex:0 1 calc((100% - 3 * clamp(16px,1.8vw,24px)) / 4)}
+@media (max-width:1100px){.team-card{flex-basis:calc((100% - 2 * clamp(16px,1.8vw,24px)) / 3)}}
+@media (max-width:760px){.team-card{flex-basis:calc((100% - clamp(16px,1.8vw,24px)) / 2)}}
+@media (max-width:420px){.team-card{flex-basis:100%}}
+
+/* ---- 68. one full-width header panel instead of six little dropdowns.
+   Hovering anywhere in the nav opens it; every top-level destination is there,
+   with its sub-pages under it in smaller type. ---- */
+.mega{
+  position:absolute;left:0;right:0;top:100%;z-index:89;
+  background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  box-shadow:0 26px 52px rgba(16,24,40,.11);
+  opacity:0;visibility:hidden;transform:translateY(-10px);
+  transition:opacity .26s var(--e),transform .28s var(--e),visibility .28s;
+  max-height:min(46vh,540px);overflow-y:auto;overscroll-behavior:contain;
+}
+.mega.open{opacity:1;visibility:visible;transform:none}
+.mega-grid{
+  display:grid;grid-template-columns:repeat(6,minmax(0,1fr));
+  gap:clamp(18px,2vw,34px);
+  min-height:clamp(210px,30vh,380px);
+  padding:clamp(26px,3vw,40px) 0 clamp(30px,3.4vw,46px);
+  align-content:start;
+}
+.mega-col{display:flex;flex-direction:column;gap:2px;min-width:0}
+.mega-top{
+  font-size:17.5px;font-weight:700;letter-spacing:-.016em;color:var(--ink);
+  padding:6px 0 10px;margin-bottom:6px;border-bottom:1px solid var(--line);
+  transition:color .2s;
+}
+.mega-top:hover{color:var(--blue)}
+.mega-sub{
+  font-size:14.5px;color:var(--ink-70);padding:6px 0;line-height:1.35;
+  transition:color .2s,padding-left .28s var(--e);
+}
+.mega-sub:hover{color:var(--blue);padding-left:5px}
+.mega-all{color:var(--blue);font-weight:600;margin-top:4px}
+/* the old per-item dropdowns are replaced by the panel on desktop */
+@media (min-width:981px){ .drop{display:none} }
+/* without JS the panel still opens, just on the whole header */
+.no-js .hdr:hover .mega{opacity:1;visibility:visible;transform:none}
+@media (max-width:980px){ .mega{display:none} }
+@media (max-width:1240px){
+  .mega-grid{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:clamp(20px,2.4vw,30px)}
+}
+
+/* ---- 69. the panel was landing at 46% of the viewport; the brief was 30-40%.
+   Tighter link rhythm and padding bring it into range without clipping, and
+   the Mac Repair list (the tallest column) splits in two so the panel does not
+   grow with the service count. ---- */
+.mega{max-height:min(42vh,470px)}
+.mega-grid{
+  min-height:0;
+  padding:clamp(20px,2.2vw,30px) 0 clamp(22px,2.4vw,34px);
+  gap:clamp(16px,1.7vw,28px);
+}
+.mega-top{font-size:17px;padding:4px 0 8px;margin-bottom:4px}
+.mega-sub{font-size:14.5px;padding:3.5px 0}
+.mega-all{margin-top:6px}
+.mega-col--split .mega-list{display:grid;grid-template-columns:1fr 1fr;column-gap:clamp(12px,1.2vw,20px)}
+@media (max-width:1240px){
+  .mega-col--split .mega-list{grid-template-columns:1fr}
+}
+
+.mega-grid{grid-template-columns:.8fr .8fr 2fr 1fr 1.25fr 1fr}
+.mega-list{display:block}
+@media (max-width:1240px){.mega-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
+/* ---- 70. below 1240px the panel was falling to two rows of three and getting
+   clipped by its own max-height. Six columns all the way down to the drawer
+   breakpoint keeps it one row, so it never needs to scroll. ---- */
+@media (max-width:1240px) and (min-width:981px){
+  .mega-grid{grid-template-columns:repeat(6,minmax(0,1fr));gap:clamp(12px,1.3vw,20px)}
+  .mega-col--split .mega-list{grid-template-columns:1fr}
+  .mega-top{font-size:15.5px}
+  .mega-sub{font-size:13.5px;padding:3px 0}
+}
+/* narrow laptops are short as well as narrow, so 42vh is not enough room for
+   the same six columns; give the panel a little more there rather than scroll */
+@media (max-width:1240px) and (min-width:981px){ .mega{max-height:min(52vh,470px)} }
